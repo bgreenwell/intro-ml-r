@@ -1,0 +1,15 @@
+---
+output: github_document
+---
+
+# Introduction to Machine Learning in R
+
+If I ever manage to finish the slides, they'll be available [here](https://bgreenwell.github.io/intro-ml-r/intro-ml-r.html#1)!
+
+```{r out-of-gas, echo=FALSE, out.width="50%"}
+RBitmoji::plot_comic(
+  id = "1551b314-5e8a-4477-aca2-088c05963111-v1",
+  tag = "out of gas"
+)
+```
+
