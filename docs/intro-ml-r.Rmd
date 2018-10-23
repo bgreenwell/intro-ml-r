@@ -172,7 +172,6 @@ Aside from predictions, we are often interested in understanding the way that $Y
 knitr::include_graphics("figures/vip-pdp-horizontal.png")
 ```
 
-
 ]
 
 ]
@@ -181,6 +180,8 @@ knitr::include_graphics("figures/vip-pdp-horizontal.png")
 ---
 
 # Algorithmic interpretation
+
+<br>
 
 ```{r black-box-02, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/black-box-02.png")
@@ -191,27 +192,10 @@ knitr::include_graphics("figures/black-box-02.png")
 
 # Algorithmic interpretation
 
+<br>
+
 ```{r black-box-03, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/black-box-03.png")
-```
-
-
----
-
-# Modeling process
-
-Before introducing any algorithms, we'll briefly cover concepts that are useful for any type of machine learning model:
-
-* Data splitting
-
-* Feature engineering
-
-* Model formulation
-
-* Model evaluation and tuning
-
-```{r, echo=FALSE, out.width="80%"}
-knitr::include_graphics("Figures/modeling_process2.png")
 ```
 
 
@@ -291,12 +275,13 @@ It is difficult to give a general rule of `r emo::ji("thumbs up")` on how to cho
 
 ---
 
-class: clear, middle, center
+# Data splitting strategies
+
+<br><br>
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/data-splitting.png")
 ```
-
 
 
 ---
@@ -314,18 +299,24 @@ knitr::include_graphics("figures/cross-validation.png")
 
 # Data splitting in R
 
+.code125[
+
 ```{r sampling}
 library(rsample)  # for data splitting
 
 # Make sure that you get the same random numbers
 set.seed(123)
-data_split <- initial_split(pdp::boston, prop = .7, strata = "cmedv")
+data_split <- initial_split(
+  pdp::boston, prop = .7, strata = "cmedv"
+)
 
 boston_train <- training(data_split)  # train
 boston_test  <- testing(data_split)  #test
 
 nrow(boston_train)/nrow(pdp::boston)
 ```
+
+]
 
 
 ---
@@ -346,10 +337,18 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 # A handy flow chart
 
-```{r 02-flow-chart, echo=FALSE, out.width="90%"}
+```{r sklearn-chart, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/flow-chart.png")
 ```
 
+
+---
+
+# Another handy chart
+
+```{r apm-chart, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figures/apm-summary.png")
+```
 
 
 ---
