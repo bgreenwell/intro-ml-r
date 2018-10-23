@@ -43,6 +43,15 @@ position: absolute;
   border-bottom: 0px solid #FAFAFA;
 }
 
+.clear > h1 {
+  font-family: 'Fira Sans';
+  font-weight: normal;
+  font-size: 45px;
+  margin-top: -95px;
+  margin-left: -00px;
+  color: #FAFAFA;
+}
+
 .remark-slide-content > h2, h3, h4 {
   padding-top: -15px;
   padding-bottom: 00px;
