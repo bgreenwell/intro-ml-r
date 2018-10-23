@@ -78,7 +78,7 @@ class: clear, middle, center
 
 --
 
-&lt;img src="intro-ml-r_files/figure-html/lets-go-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+
 
 
 ---
@@ -639,20 +639,20 @@ class: clear, middle
 ```r
 # Variable importance scores
 *vip::vi(spam_tree)
-## [38;5;246m# A tibble: 48 x 2[39m
+## [90m# A tibble: 48 x 2[39m
 ##    Variable        Importance
-##    [3m[38;5;246m&lt;chr&gt;[39m[23m                [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m 1[39m charExclamation      508. 
-## [38;5;250m 2[39m capitalLong          260. 
-## [38;5;250m 3[39m capitalAve           199. 
-## [38;5;250m 4[39m free                 198. 
-## [38;5;250m 5[39m charDollar           195. 
-## [38;5;250m 6[39m your                 183. 
-## [38;5;250m 7[39m remove               177. 
-## [38;5;250m 8[39m all                  127. 
-## [38;5;250m 9[39m capitalTotal         108. 
-## [38;5;250m10[39m hp                    74.3
-## [38;5;246m# ... with 38 more rows[39m
+##    [3m[90m&lt;chr&gt;[39m[23m                [3m[90m&lt;dbl&gt;[39m[23m
+## [90m 1[39m charExclamation      508. 
+## [90m 2[39m capitalLong          260. 
+## [90m 3[39m capitalAve           199. 
+## [90m 4[39m free                 198. 
+## [90m 5[39m charDollar           195. 
+## [90m 6[39m your                 183. 
+## [90m 7[39m remove               177. 
+## [90m 8[39m all                  127. 
+## [90m 9[39m capitalTotal         108. 
+## [90m10[39m hp                    74.3
+## [90m# ... with 38 more rows[39m
 ```
 
 ]
@@ -1122,17 +1122,17 @@ data(boston, package = "pdp")
 
 ```r
 # Using the randomForest package
-set.seed(2007)  # for reproducibility
+set.seed(2007)  # reproducibility
 system.time(
   boston_rf &lt;- randomForest(
     cmedv ~ ., data = boston, 
-    ntree = 5000,
-    mtry = 5,
-    importance = FALSE
+*   ntree = 5000,
+*   mtry = 5,
+*   importance = FALSE
   )
 )
 ##    user  system elapsed 
-##   7.720   0.147   7.984
+##   7.396   0.151   7.573
 ```
 
 ```
@@ -1146,17 +1146,17 @@ system.time(
 
 ```r
 # Using the ranger package
-set.seed(1652)  # for reproducibility
+set.seed(1652)  # reproducibility
 system.time(
   boston_ranger &lt;- ranger(
     cmedv ~ ., data = boston, 
-    num.trees = 5000, 
+*   num.trees = 5000,
 *   mtry = 5,  # :/
-    importance = "impurity"
+*   importance = "impurity"
   )
 )
 ##    user  system elapsed 
-##   6.647   0.200   2.184
+##   6.910   0.235   1.186
 ```
 
 ```
@@ -1176,13 +1176,13 @@ system.time(
 
 * Most RF packages provide variable importance measures, but not all of them provide variable importance plots (VIPs)
 
-* Enter...[`vip`](https://github.com/AFIT-R/vip) 
+* Enter...[vip](https://koalaverse.github.io/vip/index.html) 
 
     - Provides a consistent framework for extracting and plotting variable importance scores from many types of ML models
 
     - `vi()` always returns a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html)
 
-    - `vip()` uses [`ggplot2`](http://ggplot2.org/)
+    - `vip()` uses [ggplot2](http://ggplot2.org/)
 
 ]
 
@@ -1190,26 +1190,28 @@ system.time(
 
 
 ```r
-# Not yet on CRAN (experimental)
-devtools::install_github("AFIT-R/vip")
+# Install from CRAN
+install.packages("vip")
 ```
 
 &lt;img src="figures/vip-logo.svg" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
+class: clear, middle
 
 
 ```r
 # Construct variable importance plots (the old way)
 par(mfrow = c(1, 2))  # side-by-side plots
-*varImpPlot(boston_rf)  # randomForest::varImpPlot()
+*varImpPlot(boston_rf, main = "")  # randomForest::varImpPlot()
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston-rf-varImpPlot-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston-rf-varImpPlot-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
+class: clear
 
 
 ```r
@@ -1220,10 +1222,10 @@ library(vip)  # for better (and consistent) variable importance plots
 p1 &lt;- vip(boston_rf, type = 1) + ggtitle("randomForest")
 p2 &lt;- vip(boston_rf, type = 2) + ggtitle("randomForest")
 p3 &lt;- vip(boston_ranger) + ggtitle("ranger")
-*grid.arrange(p1, p2, p3, ncol = 3)
+*grid.arrange(p1, p2, p3, ncol = 3)  # side-by-side plots
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston-rf-vip-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston-rf-vip-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1259,9 +1261,9 @@ p3 &lt;- vip(boston_ranger) + ggtitle("ranger")
 
 * Not all RF implementations provide support for constructing partial dependence plots (PDPs)
 
-* Enter...[`pdp`](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html)
+* Enter...[pdp](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html)
 
-    - Provides a consistent way of constructing PDPs (and more) from many types of ML models (not just RFs)
+    - A consistent way of constructing PDPs (and more) from many types of ML models (not just RFs)
 
     - Allows for multivariate displays (i.e., interactions) and so much more!!
     
@@ -1275,17 +1277,15 @@ p3 &lt;- vip(boston_ranger) + ggtitle("ranger")
 ```r
 # Install from CRAN
 install.packages("pdp")
-
-# Install from GitHub
-devtools::install_github("bgreenwell/pdp")
 ```
 
-&lt;img src="figures/pdp-logo.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/pdp-logo.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
 ---
+class: clear, middle
 
 # Partial dependence plots
 
@@ -1306,12 +1306,15 @@ grid.arrange(p1, p2, p3, ncol = 3)
 
 
 ---
+class: clear, middle
 
 # Partial dependence plots
 
+.code115[
+
 
 ```r
-# 3-D plots
+*# 3-D plots :)
 *pd &lt;- attr(p3, "partial.data")  # no need to recalculate
 p1 &lt;- plotPartial(pd, 
   levelplot = FALSE, drape = TRUE, colorkey = FALSE,
@@ -1321,48 +1324,62 @@ p1 &lt;- plotPartial(pd,
 
 
 ```r
-# Using ggplot2
+*# Using ggplot2 :)
 library(ggplot2)
-p2 &lt;- autoplot(pd)
+p2 &lt;- autoplot(pd, palette = "magma")
 ```
 
 
 ```r
-# ICE and c-ICE curves
+*# ICE and c-ICE curves :)
 p3 &lt;- boston_ranger %&gt;%  # %&gt;% is automatically imported!
   partial(pred.var = "rm", ice = TRUE, center = TRUE) %&gt;%
   autoplot(alpha = 0.1)
 ```
 
+]
+
 
 ---
+class: clear, middle
 
 # Partial dependence plots
 
+.code150[
+
 
 ```r
-# Display all three plots side-by-side
+# Display all three plots side by side
 grid.arrange(p1, p2, p3, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-15-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-13-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
 
 
 ---
 
 # Proximity matrix
+
+.font115[
 
 * In random forests (and bagging), **trees are intentionally grown deep**!
 
+]
+
 
 ---
+class: clear, middle, center
 
-&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-3-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-3-1.svg" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Proximity matrix
+
+.font115[
 
 * In random forests (and bagging), **trees are intentionally grown deep**!
 
@@ -1378,7 +1395,9 @@ grid.arrange(p1, p2, p3, ncol = 3)
 
 * **Requires the storage of an `\(N \times N\)` matrix!!** 😱
 
-* Only available in [`randomForest`](https://cran.r-project.org/package=randomForest), [`party`](https://cran.r-project.org/web/packages/party/index.html), and [`bigrf`](https://github.com/aloysius-lim/bigrf)
+* Only available in [randomForest](https://cran.r-project.org/package=randomForest), [party](https://cran.r-project.org/web/packages/party/index.html), and [bigrf](https://github.com/aloysius-lim/bigrf)
+
+]
 
 
 ---
@@ -1423,7 +1442,7 @@ heatmap(1 - banknote_rf$proximity, col = viridis::plasma(256))
 
 # Outlier scores
 
-Outlyingness of case `\(n\)` in class `\(j\)` to all other cases in class `\(j\)`: `$$out\left(n\right) = N / \sum_{cl\left(k\right) = j} prox_{ik} ^ 2$$`
+Outlyingness of case `\(n\)` in class `\(j\)` to all other cases in class `\(j\)`: `\(out\left(n\right) = N / \sum_{cl\left(k\right) = j} prox_{ik} ^ 2\)`
 
 .pull-left[
 
@@ -1462,7 +1481,7 @@ ggplot(outlyingness, aes(x = obs, y = out)) +
 MDSplot(banknote_rf, fac = as.factor(banknote$Y), k = 2, cex = 1.5)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/MDS-1.svg" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/MDS-1.svg" width="45%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1485,17 +1504,17 @@ MDSplot(banknote_rf, fac = as.factor(banknote$Y), k = 2, cex = 1.5)
 
 * Highly computational (requires many random forest runs!!)
 
-* Resulting **OOB error estimate tends to be overly optimistic** 
+&lt;!-- * Resulting **OOB error estimate tends to be overly optimistic**  --&gt;
 
-* Only available in [`randomForest`](https://cran.r-project.org/package=randomForest)
+* Only available in [randomForest](https://cran.r-project.org/package=randomForest)
 
 
 ---
-class: inverse, center, middle
+class: clear, middle, center
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Fog_forrest_frickberg.jpg)
 
-# Boosting
+.font300.white[Boosting]
 
 ???
 
@@ -1506,7 +1525,7 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 # Background
 
-.scrollable[
+.font125[
 
 * Boosting is a general technique for creating an ensemble of models (*meta-algorithm*)
 
@@ -1519,6 +1538,15 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 * Most commonly used with **shallow decision trees** (e.g., decision stumps), but other types of models can be boosted
 
 * **Boosting requires more tuning**, but is typically faster and more accurate than RFs!
+
+]
+
+
+---
+
+# Background
+
+.font125[
 
 * **Many flavors of boosting:** AdaBoost, Real AdaBoost, gradient boosting, and stochastic gradient boosting (GBM), for example
 
@@ -1551,7 +1579,11 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 * Here, `\(B\)`, `\(\epsilon\)`, and `\(d\)` are tuning parameters
 
-* [R code](https://github.com/bgreenwell/MLDay18/blob/master/code/rpartBoost.R)
+.font150.center[
+
+[Poor mans GBM code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/rpartBoost.R)
+
+]
 
 ???
 
@@ -1559,20 +1591,20 @@ Source: [Computer Age Statistical Inference, pg. 333](https://web.stanford.edu/~
 
 
 ---
-class: center, middle
+class: clear, center, middle
 
-# [Boosting regression stumps](https://github.com/bgreenwell/MLDay18/blob/master/code/rpartBoost.R)
+.center.font200[Boosting regression stumps]
 
 ![](gifs/boosted_stumps.gif)
 
 
 ---
 
-# GBM packages in R
+# Some GBM packages in R
 
 .scrollable[
 
-* [`gbm`](https://github.com/gbm-developers/gbm): **g**eneralized **b**oosted **m**odels
+* [gbm](https://github.com/gbm-developers/gbm): **g**eneralized **b**oosted **m**odels
 
     - The original R implementation of GMBs (by Greg Ridgeway)
     
@@ -1584,7 +1616,7 @@ class: center, middle
     
     - Currently orphaned on CRAN (for now)
     
-* [`gbm3`](https://github.com/gbm-developers/gbm3): **g**eneralized **b**oosted **m**odels
+* [gbm3](https://github.com/gbm-developers/gbm3): **g**eneralized **b**oosted **m**odels
 
     - Shiny new version of `gbm` that is not backwards compatible
     
@@ -1592,7 +1624,7 @@ class: center, middle
     
     - Not currently listed on CRAN
     
-* [`xgboost`](https://github.com/dmlc/xgboost): &lt;span style="color:DeepSkyBlue"&gt;eXtreme Gradient Boosting&lt;/span&gt;
+* [xgboost](https://github.com/dmlc/xgboost): &lt;span style="color:DeepSkyBlue"&gt;eXtreme Gradient Boosting&lt;/span&gt;
 
     - Widely used by data scientists to achieve **state-of-the-art** results across many machine learning challenges (e.g., Kaggle)
 
@@ -1609,15 +1641,15 @@ class: center, middle
 &lt;img src="figures/gpu.jpg" width="50%" style="display: block; margin: auto;" /&gt;
 
 
-* [`lightgbm`](https://github.com/Microsoft/LightGBM):  
+* [lightgbm](https://github.com/Microsoft/LightGBM):  
 
-    - Microsoft supported, and somewhat [faster](https://github.com/Microsoft/LightGBM/blob/master/docs/Experiments.rst#comparison-experiment), alternative to `xgboost`
+    - Microsoft supported, and somewhat [faster](https://github.com/Microsoft/LightGBM/blob/master/docs/Experiments.rst#comparison-experiment), alternative to **xgboost**
 
     - Uses *leaf-wise* (i.e., best-first) tree growth
     
     - Not currently listed on CRAN
 
-* [`mboost`](https://github.com/boost-R): **m**odel-based **boost**ing
+* [mboost](https://github.com/boost-R): **m**odel-based **boost**ing
 
     - Implements tools for fitting and evaluating a variety of regression and classification models (somewhere between GLMs/GAMs and GBMs)
 
@@ -1628,18 +1660,25 @@ class: center, middle
 
 # Missing values
 
+.font140[
+
 * Unlike RFs, GBMs typically support missing values!
 
 * In most GBM implementations, `NA`s are interpreted as containing information (i.e., missing for a reason), rather than missing at random
 
-    - In [`gbm`](https://github.com/gbm-developers/gbm) and [`gbm3`](https://github.com/gbm-developers/gbm3), a separate branch is created at each split for `NA`s (i.e., each decision node contains three splits: left, right, and missing)
+    - In [gbm](https://github.com/gbm-developers/gbm) and [gbm3](https://github.com/gbm-developers/gbm3), a separate branch is created at each split for `NA`s (i.e., each decision node contains three splits: left, right, and missing)
     
-    - In [`h2o`](https://github.com/h2oai/h2o-3/tree/master/h2o-r) and [`xgboost`](https://github.com/dmlc/xgboost) each split has a **default direction** that is learned during training (`NA`s take the default route!)
+    - In [h2o](https://github.com/h2oai/h2o-3/tree/master/h2o-r) and [xgboost](https://github.com/dmlc/xgboost) each split has a **default direction** that is learned during training (`NA`s take the default route!)
+
+]
 
 
 ---
+class: clear, middle
 
 # Boston housing example
+
+.code110[
 
 
 ```r
@@ -1663,20 +1702,23 @@ boston_gbm &lt;- gbm(
 )
 ```
 
+]
+
 
 ---
+class: clear, middle
 
 # Boston housing example
 
 
 ```r
-best_iter &lt;- gbm.perf(
+best_iter &lt;- gbm.perf(  # how many trees?
   boston_gbm, 
 * method = "cv"  # or "OOB" or "test"
 )
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston_gbm_best-1.svg" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston_gbm_best-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1694,11 +1736,12 @@ system.time(
     pred.var = c("lon", "nox"),
 *   recursive = FALSE,
     chull = TRUE, 
+    palette = "magma",
 *   n.trees = best_iter
   )
 )
 ##    user  system elapsed 
-## 120.083   0.379 120.977
+## 110.629   0.230 111.021
 ```
 
 ]
@@ -1714,11 +1757,12 @@ system.time(
     pred.var = c("lon", "nox"),
 *   recursive = TRUE,
     chull = TRUE, 
+    palette = "magma",
 *   n.trees = best_iter
   )
 )
 ##    user  system elapsed 
-##   0.449   0.002   0.455
+##   0.453   0.001   0.453
 ```
 
 ]
@@ -1730,7 +1774,7 @@ system.time(
 
 
 ```r
-# Display plots side-by-side
+# Display plots side by side
 grid.arrange(autoplot(pd1), autoplot(pd2), ncol = 2)
 ```
 
@@ -1773,12 +1817,11 @@ ggplot(ames, aes(x = Sale_Price, y = Overall_Qual)) +
 
 
 ---
+class: clear, middle
 
 # Ames housing data
 
 .scrollable[
-
-.pull-left[
 
 
 ```r
@@ -1811,14 +1854,11 @@ ames_xgb &lt;- xgboost(         # tune using `xgb.cv()`
 
 ]
 
-.pull-right[
+
+---
+class: clear, middle
 
 &lt;img src="intro-ml-r_files/figure-html/ames-xgboost-cv-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
-]
-
 
 ---
 
@@ -1879,14 +1919,17 @@ p6 &lt;- autoplot(oq_ice, alpha = 0.1)
 grid.arrange(p4, p5, p6, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
+class: clear, middle, center
 
 # Ames housing data
 
-&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-vi-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
+.font200.center[Variable effect and variable importance]
+
+&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-vi-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
