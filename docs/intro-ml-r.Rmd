@@ -90,40 +90,11 @@ for (pkg in pkgs) {
 
 
 ---
-
-# Ames housing data
-
-.scrollable[
-
-```{r data-sets-regression}
-# See ?AmesHousing::make_ames for details
-ames <- AmesHousing::make_ames()
-DT::datatable(ames) 
-```
-
-]
-
-
----
-
-# Email spam data
-
-.scrollable[
-
-```{r data-sets-classification}
-data(spam, package = "kernlab")
-tibble::as_tibble(spam)  # see ?spam for details
-```
-
-]
-
-
----
 class: clear, middle, center
 
 --
 
-```{r lets-go, echo=FALSE, out.width="100%"}
+```{r lets-go, echo=FALSE, out.width="60%"}
 set.seed(4); RBitmoji::plot_comic(my_id, tag = "lets go")
 ```
 
@@ -137,31 +108,42 @@ knitr::include_graphics("figures/fundamentals.jpg")
 
 
 ---
-class: center
 
 # Black box nature
 
-```{r black-box-nature, echo=FALSE, out.width="100%"}
+<br><br><br>
+
+```{r black-box-nature, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/black-box-nature.svg")
 ```
 
 
 ---
-class: center
 
 # Data modeling culture
 
-```{r data-modeling-culture, echo=FALSE, out.width="100%"}
+.font200[
+
+Assume a stochastic data model:
+
+]
+
+```{r data-modeling-culture, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/data-modeling-culture.svg")
 ```
 
 
 ---
-class: center
 
 # Algorithmic modeling culture
 
-```{r algorithmic-modeling-culture, echo=FALSE, out.width="100%"}
+.font200[
+
+Find a function $f\left(\boldsymbol{X}\right)$ to predict $\boldsymbol{Y}$:
+
+]
+
+```{r algorithmic-modeling-culture, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/algorithmic-modeling-culture.svg")
 ```
 
