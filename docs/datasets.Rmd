@@ -11,39 +11,87 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# Ames housing data
+# Prerequisites
 
-The [AmesHousing](https://cran.r-project.org/package=AmesHousing) package contains a processed version of the data described by [De Cock (2011)](https://ww2.amstat.org/publications/jse/v19n3/decock.pdf) where 82 fields were recored for 2,930 properties in Ames IA. A description of each field can be found [here](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data).
+```{r prerequisites, eval=FALSE}
+# Install required packages
+install.packages(c("AmesHousing", "kernlab", "pdp"))
+```
 
-```{r ames-housing}
+
+# Regression
+
+## Boston housing data
+
+Data on median housing values from 506 census tracts in the suburbs of Boston from the 1970 census. This data frame is a corrected version of the original data by [Harrison and Rubinfeld (1978)](https://www.sciencedirect.com/science/article/abs/pii/0095069678900062) with additional spatial information. The data are available in the [pdp](https://cran.r-project.org/package=pdp) package which were taken directly from [mlbench](https://cran.r-project.org/package=mlbench) after the removal of unneeded columns (i.e., name of town, census tract, and the uncorrected median home value). See `?pdp::boston` for details.
+
+```{r boston}
+# Load the Boston housing data
+data(boston, package = "pdp")
+
+# View the Ames housing data
+DT::datatable(boston, extensions = "FixedColumns",
+  options = list(
+    dom = "t",
+    scrollX = TRUE,
+    fixedColumns = TRUE
+))
+```
+
+
+## Ames housing data
+
+The [AmesHousing](https://cran.r-project.org/package=AmesHousing) package contains a processed version of the data described by [De Cock (2011)](https://ww2.amstat.org/publications/jse/v19n3/decock.pdf) where 82 fields were recorded for 2,930 properties in Ames IA. A description of each field can be found [here](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data). This is a more contemporary alternative to the Boston housing data described above.
+
+```{r ames}
 # Load the Ames housing data
 ames <- AmesHousing::make_ames()
 
 # View the Ames housing data
-# DT::datatable(ames[1:10, ], extensions = "FixedColumns",
-#   options = list(
-#     dom = "t",
-#     scrollX = TRUE,
-#     fixedColumns = TRUE
-# ))  
+DT::datatable(ames, extensions = "FixedColumns",
+  options = list(
+    dom = "t",
+    scrollX = TRUE,
+    fixedColumns = TRUE
+))
 ```
 
 
-# E-mail spam data
+# Classification
+
+## Mushroom edibility
+
+There is no simple rule for determining the edibility of a mushroom; no rules like "leaflets three, let it be", "hairy vine, no friend of mine" and "berries white, run in fright" for poison ivy. The following data, taken from the [UCI Machine Learning Reposirtory](https://archive.ics.uci.edu/ml/datasets/mushroom) contain 21 physical characteristics on 8,124 mushrooms classified as either poisonous or edible.
+
+```{r mushroom}
+# Load the mushroom data
+mushroom <- read.csv("https://bgreenwell.github.io/MLDay18/data/mushroom.csv")
+
+# View the mushroom data
+DT::datatable(mushroom, extensions = "FixedColumns",
+  options = list(
+    dom = "t",
+    scrollX = TRUE,
+    fixedColumns = TRUE
+))
+```
+
+
+## E-mail spam data
 
 This is a data set collected at Hewlett-Packard Labs, that classifies 4,601 e-mails as spam or non-spam (i.e., "ham"). There are 2,788 non-spam e-mails and 1.813 spam e-mails. In addition to this class label there are 57 variables indicating the frequency of certain words and characters in the e-mail. The first 48 variables contain the frequency of the variable name (e.g., business) in the e-mail. If the variable name starts with "num" (e.g., num650) then it indicates the frequency of the corresponding number (e.g., 650). The variables 49--54 indicate the frequency of the characters ';', '(', '[', '!', '\$', and '\#'. The variables 55--57 contain the average, longest and total run-length of capital letters. Variable 58 indicates the type of the mail and is either "nonspam" or "spam", i.e. unsolicited commercial e-mail. See `?kernlab::spam` for details.
 
 The "spam" concept is diverse: advertisements for products/web sites, make money fast schemes, chain letters, pornography, etc. This collection of spam e-mails came from the collectors' postmaster and individuals who had filed spam. The collection of non-spam e-mails came from filed work and personal e-mails, and hence the word 'george' and the area code '650' are indicators of non-spam. These are useful when constructing a personalized spam filter. One would either have to blind such non-spam indicators or get a very wide collection of non-spam to generate a general purpose spam filter.
 
-```{r e-mail-spam}
+```{r spam}
 # Load the email spam data
 data(spam, package = "kernlab")
 
 # View the email spam data
-# DT::datatable(spam[1:10, ], extensions = "FixedColumns",
-#   options = list(
-#     dom = "t",
-#     scrollX = TRUE,
-#     fixedColumns = TRUE
-# )) 
+DT::datatable(spam, extensions = "FixedColumns",
+  options = list(
+    dom = "t",
+    scrollX = TRUE,
+    fixedColumns = TRUE
+))
 ```
