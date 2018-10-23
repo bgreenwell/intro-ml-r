@@ -793,28 +793,28 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 # Bagging trees
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-1-1.svg" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-1-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Trees are step functions
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-2-1.svg" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-2-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Trees are noisy
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-3-1.svg" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-3-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Bagging reduces variance
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-4-1.svg" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-4-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -829,13 +829,14 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 *library(randomForest)
 
 # Fit a bagger model
-set.seed(1633)  # for reproducibility
+*xtst &lt;- subset(tst, select = -type)
+*set.seed(1633)  # reproducibility
 spam_bag &lt;- randomForest(
   type ~ ., 
   data = trn, 
   ntree = 250,
-* mtry = ncol(xtrn),  # use all available features
-  xtest = subset(tst, select = -type),
+* mtry = ncol(xtrn),
+  xtest = xtst,
   ytest = tst$type,
   keep.forest = TRUE
 )
@@ -851,11 +852,11 @@ spam_bag &lt;- randomForest(
 
 
 ---
-class: inverse, center, middle
+class: clear, center, middle
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Fog_forrest_frickberg.jpg)
 
-# Random forest
+.font300.white[Random forest]
 
 ???
 
@@ -893,7 +894,7 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 .pull-left[
 
-* [`randomForest`](https://cran.r-project.org/package=randomForest)
+* [randomForest](https://cran.r-project.org/package=randomForest)
 
     - The standard (implements most of the **bells and whistles**; great for EDA!!)
     
@@ -901,27 +902,27 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
     
     - Does not scale well, but can be parallelized using `foreach`!
 
-* [`randomForestSRC`](https://kogalur.github.io/randomForestSRC/index.html)
+* [randomForestSRC](https://kogalur.github.io/randomForestSRC/index.html)
 
     - Classification, regression, and survival analysis (including ***competing risks***)
     
     - MPI/OpenMP support
 
-* [`ranger`](https://github.com/imbs-hl/ranger): **ran**dom forest **ge**ne**r**ator
+* [ranger](https://github.com/imbs-hl/ranger): **ran**dom forest **ge**ne**r**ator
 
     - Classification, regression, and survival analysis
     
     - [Fast!](https://www.jstatsoft.org/article/view/v077i01)
     
-    - Accepts sparse numeric matrices (i.e., `dgcMatrix` objects from the [`Matrix`](https://cran.r-project.org/package=Matrix) package)
+    - Accepts sparse numeric matrices (i.e., `dgcMatrix` objects from the [Matrix](https://cran.r-project.org/package=Matrix) package)
     
-    - Estimated time to completion!! 💴
+    - Estimated time to completion!!
 
 ]
 
 .pull-right[
 
-* [`party`/`partykit`](https://cran.r-project.org/web/packages/party/index.html)
+* [party/partykit](https://cran.r-project.org/web/packages/party/index.html)
 
     - Uses *conditional inference trees* as the base learners
     
@@ -929,7 +930,7 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
     
     - Can be slow on large data sets
 
-* [`bigrf`](https://github.com/aloysius-lim/bigrf)
+* [bigrf](https://github.com/aloysius-lim/bigrf)
 
   - Classification only
 
@@ -937,11 +938,11 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
   
   - Disk caching using [`bigmmory`](https://cran.r-project.org/web/packages/bigmemory/)
 
-* [`Rborist`](https://github.com/suiji/Arborist)
+* [Rborist](https://github.com/suiji/Arborist)
 
     - Offers parallel, distributed tree construction
 
-* [`h2o`](https://github.com/h2oai/h2o-3/tree/master/h2o-r)
+* [h2o](https://github.com/h2oai/h2o-3/tree/master/h2o-r)
 
   - Distributed random forests via cloud computing
   
@@ -964,13 +965,14 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 library(randomForest)
 
 # Fit a random forest
-set.seed(1633)  # for reproducibility
+xtst &lt;- subset(tst, select = -type)
+set.seed(1633)  # reproducibility
 spam_rf &lt;- randomForest(
   type ~ ., 
   data = trn, 
   ntree = 250,
 * mtry = 7,  # floor(sqrt(p))
-  xtest = subset(tst, select = -type),
+  xtest = xtst,
   ytest = tst$type,
   keep.forest = TRUE
 )
@@ -986,6 +988,7 @@ spam_rf &lt;- randomForest(
 
 
 ---
+class: clear
 
 # Random forest
 
@@ -995,7 +998,7 @@ spam_rf &lt;- randomForest(
 
 * Competitive accuracy
 
-* Supervised and unsupervised learning
+* Supervised **AND** unsupervised learning
 
 * *Out-of-bag* data 😎
 
@@ -1019,11 +1022,9 @@ spam_rf &lt;- randomForest(
 
 * Missing values (**why?**)
 
-* Can be slow on large data sets (deep trees)!
+* Can be slow on large data sets since trees are intentionally overgrown (i.e., deep)
 
     - `\(m_{try}\)` mitigates this issue to some extent
-
-&lt;img src="figures/bells-and-whistles.jpg" width="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1032,7 +1033,9 @@ spam_rf &lt;- randomForest(
 
 # Out-of-bag data
 
-* For large enough `\(N\)`, on average, `\(1 - e^{-1} \approx 63.21\)`% or the original records end up in any bootstrap sample
+For large enough `\(N\)`, on average, `\(1 - e^{-1} \approx 63.21\)`% or the original records end up in any bootstrap sample
+
+.code75[
 
 
 ```r
@@ -1043,20 +1046,23 @@ mean(x %in% sample(x, replace = TRUE))  # non-OOB proportion
 ## [1] 0.63232
 ```
 
-* Thus, roughly `\(e^{-1} \approx 36.79\)`% of the original observations are not used in the construction of a particular tree
+]
+
+* Roughly `\(e^{-1} \approx 36.79\)`% of the observations are not used in the construction of a particular tree
 
 * These observations are considered *out-of-bag* (OOB) and can be used to
 
     - Provide an unbiased assessment of model performance (**sort of an unstructured, but free, cross-validation**)
  
-    - Construct novel variable importance measure based on the **predictive strength** of each predictor!!
+    - Construct novel variable importance measure based on the **predictive strength** of each feature!!
 
 
 ---
-
+class: clear, middle, center
 # Predicting email spam
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-9-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+.font150.bold.left[OOB vs. test error: e-mail spam example]
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1100,6 +1106,7 @@ mean(x %in% sample(x, replace = TRUE))  # non-OOB proportion
 
 
 ---
+class: clear
 
 
 ```r

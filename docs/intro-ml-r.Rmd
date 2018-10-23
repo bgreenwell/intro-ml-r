@@ -850,7 +850,7 @@ knitr::include_graphics("figures/millionaire.png")
 
 # Bagging trees
 
-```{r bagging-1, echo=FALSE, out.width="65%"}
+```{r bagging-1, echo=FALSE, out.width="60%"}
 # Simulate some sine wave data
 set.seed(1112)  # for reproducibility
 x <- seq(from = 0, to = 2 * pi, length = 100)
@@ -866,7 +866,7 @@ legend("topright", legend = "True function", lty = 1, inset = 0.01,
 
 # Trees are step functions
 
-```{r bagging-2, echo=FALSE, out.width="65%"}
+```{r bagging-2, echo=FALSE, out.width="60%"}
 # Fit a single regression tree
 fit <- rpart(y ~ x, cp = 0)
 pred <- predict(fit)
@@ -884,7 +884,7 @@ legend("topright", legend = lgnd, col = c("black", cols[1L]),
 
 # Trees are noisy
 
-```{r bagging-3, echo=FALSE, out.width="65%"}
+```{r bagging-3, echo=FALSE, out.width="60%"}
 # Fit many regression trees to bootstrap samples
 plot(x, y)
 nsim <- 1000
@@ -909,7 +909,7 @@ legend("topright", legend = lgnd, col = c("black", cols[1L:2L]),
 
 # Bagging reduces variance
 
-```{r bagging-4, echo=FALSE, out.width="65%"}
+```{r bagging-4, echo=FALSE, out.width="60%"}
 plot(x, y)
 for (i in 1:nsim) {
   lines(x[id[, i]], pred_mat[, i], 
@@ -935,13 +935,14 @@ legend("topright", legend = lgnd, col = c("black", cols[c(1, 2, 6)]), lty = 1,
 library(randomForest)  #<<
 
 # Fit a bagger model
-set.seed(1633)  # for reproducibility
+xtst <- subset(tst, select = -type)  #<<
+set.seed(1633)  # reproducibility  #<<
 spam_bag <- randomForest(
   type ~ ., 
   data = trn, 
   ntree = 250,
-  mtry = ncol(xtrn),  # use all available features #<<
-  xtest = subset(tst, select = -type),
+  mtry = ncol(xtrn),  #<<
+  xtest = xtst,
   ytest = tst$type,
   keep.forest = TRUE
 )
@@ -972,11 +973,11 @@ legend("topright", c("Single tree", "Bagging"),
 
 
 ---
-class: inverse, center, middle
+class: clear, center, middle
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Fog_forrest_frickberg.jpg)
 
-# Random forest
+.font300.white[Random forest]
 
 ???
 
@@ -1014,7 +1015,7 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 .pull-left[
 
-* [`randomForest`](https://cran.r-project.org/package=randomForest)
+* [randomForest](https://cran.r-project.org/package=randomForest)
 
     - The standard (implements most of the **bells and whistles**; great for EDA!!)
     
@@ -1022,27 +1023,27 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
     
     - Does not scale well, but can be parallelized using `foreach`!
 
-* [`randomForestSRC`](https://kogalur.github.io/randomForestSRC/index.html)
+* [randomForestSRC](https://kogalur.github.io/randomForestSRC/index.html)
 
     - Classification, regression, and survival analysis (including ***competing risks***)
     
     - MPI/OpenMP support
 
-* [`ranger`](https://github.com/imbs-hl/ranger): **ran**dom forest **ge**ne**r**ator
+* [ranger](https://github.com/imbs-hl/ranger): **ran**dom forest **ge**ne**r**ator
 
     - Classification, regression, and survival analysis
     
     - [Fast!](https://www.jstatsoft.org/article/view/v077i01)
     
-    - Accepts sparse numeric matrices (i.e., `dgcMatrix` objects from the [`Matrix`](https://cran.r-project.org/package=Matrix) package)
+    - Accepts sparse numeric matrices (i.e., `dgcMatrix` objects from the [Matrix](https://cran.r-project.org/package=Matrix) package)
     
-    - Estimated time to completion!! `r emo::ji("money")`
+    - Estimated time to completion!!
 
 ]
 
 .pull-right[
 
-* [`party`/`partykit`](https://cran.r-project.org/web/packages/party/index.html)
+* [party/partykit](https://cran.r-project.org/web/packages/party/index.html)
 
     - Uses *conditional inference trees* as the base learners
     
@@ -1050,7 +1051,7 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
     
     - Can be slow on large data sets
 
-* [`bigrf`](https://github.com/aloysius-lim/bigrf)
+* [bigrf](https://github.com/aloysius-lim/bigrf)
 
   - Classification only
 
@@ -1058,11 +1059,11 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
   
   - Disk caching using [`bigmmory`](https://cran.r-project.org/web/packages/bigmemory/)
 
-* [`Rborist`](https://github.com/suiji/Arborist)
+* [Rborist](https://github.com/suiji/Arborist)
 
     - Offers parallel, distributed tree construction
 
-* [`h2o`](https://github.com/h2oai/h2o-3/tree/master/h2o-r)
+* [h2o](https://github.com/h2oai/h2o-3/tree/master/h2o-r)
 
   - Distributed random forests via cloud computing
   
@@ -1084,13 +1085,14 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 library(randomForest)
 
 # Fit a random forest
-set.seed(1633)  # for reproducibility
+xtst <- subset(tst, select = -type)
+set.seed(1633)  # reproducibility
 spam_rf <- randomForest(
   type ~ ., 
   data = trn, 
   ntree = 250,
   mtry = 7,  # floor(sqrt(p))  #<<
-  xtest = subset(tst, select = -type),
+  xtest = xtst,
   ytest = tst$type,
   keep.forest = TRUE
 )
@@ -1122,6 +1124,7 @@ legend("topright", c("Single tree", "Bagging", "Random forest"),
 
 
 ---
+class: clear
 
 # Random forest
 
@@ -1131,7 +1134,7 @@ legend("topright", c("Single tree", "Bagging", "Random forest"),
 
 * Competitive accuracy
 
-* Supervised and unsupervised learning
+* Supervised **AND** unsupervised learning
 
 * *Out-of-bag* data `r emo::ji("sunglasses")`
 
@@ -1155,13 +1158,9 @@ legend("topright", c("Single tree", "Bagging", "Random forest"),
 
 * Missing values (**why?**)
 
-* Can be slow on large data sets (deep trees)!
+* Can be slow on large data sets since trees are intentionally overgrown (i.e., deep)
 
     - $m_{try}$ mitigates this issue to some extent
-
-```{r fig-bells-and-whistles, echo=FALSE, out.width="80%"}
-knitr::include_graphics("figures/bells-and-whistles.jpg")
-```
 
 ]
 
@@ -1170,7 +1169,9 @@ knitr::include_graphics("figures/bells-and-whistles.jpg")
 
 # Out-of-bag data
 
-* For large enough $N$, on average, $1 - e^{-1} \approx 63.21$% or the original records end up in any bootstrap sample
+For large enough $N$, on average, $1 - e^{-1} \approx 63.21$% or the original records end up in any bootstrap sample
+
+.code75[
 
 ```{r bootstrap}
 N <- 100000
@@ -1179,20 +1180,23 @@ x <- rnorm(N)
 mean(x %in% sample(x, replace = TRUE))  # non-OOB proportion
 ```
 
-* Thus, roughly $e^{-1} \approx 36.79$% of the original observations are not used in the construction of a particular tree
+]
+
+* Roughly $e^{-1} \approx 36.79$% of the observations are not used in the construction of a particular tree
 
 * These observations are considered *out-of-bag* (OOB) and can be used to
 
     - Provide an unbiased assessment of model performance (**sort of an unstructured, but free, cross-validation**)
  
-    - Construct novel variable importance measure based on the **predictive strength** of each predictor!!
+    - Construct novel variable importance measure based on the **predictive strength** of each feature!!
 
 
 ---
-
+class: clear, middle, center
 # Predicting email spam
 
-```{r, echo=FALSE, out.width="60%"}
+.font150.bold.left[OOB vs. test error: e-mail spam example]
+```{r, echo=FALSE, fig.width=6, fig.asp=0.618, out.width="100%"}
 # Compute test error
 pred <- predict(spam_rf, newdata = xtst, type = "class")
 spam_rf_acc <- accuracy(pred = pred, obs = tst$type)
@@ -1200,7 +1204,7 @@ spam_rf_acc <- accuracy(pred = pred, obs = tst$type)
 # Plot test error
 par(mar = c(4, 4, 0.1, 0.1))
 plot(seq_len(spam_rf$ntree), spam_rf$test$err.rate[, "Test"], type = "l", 
-     col = dark2[4L], ylim = c(0.04, 0.11), 
+     col = dark2[4L], ylim = c(0.04, 0.11),
      ylab = "Error estimate", xlab = "Number of trees")
 lines(seq_len(spam_rf$ntree), spam_rf$err.rate[, "OOB"], type = "l", 
      col = dark2[1L])
@@ -1254,6 +1258,7 @@ knitr::include_graphics("figures/boston-eqn.png")
 
 
 ---
+class: clear
 
 ```{r boston-ranger}
 # Load required packages
@@ -1267,7 +1272,7 @@ data(boston, package = "pdp")
 
 ```{r boston-rf-timing}
 # Using the randomForest package
-set.seed(2007)  # for reproducibility
+set.seed(2007)  # reproducibility
 system.time(
   boston_rf <- randomForest(
     cmedv ~ ., data = boston, 
@@ -1277,7 +1282,7 @@ system.time(
   )
 )
 ```
-```{r, echo=FALSE}
+```{r boston-rf-rsquared, echo=FALSE}
 boston_rf$rsq[boston_rf$ntree]
 ```
 
@@ -1287,7 +1292,7 @@ boston_rf$rsq[boston_rf$ntree]
 
 ```{r boston-ranger-timing}
 # Using the ranger package
-set.seed(1652)  # for reproducibility
+set.seed(1652)  # reproducibility
 system.time(
   boston_ranger <- ranger(
     cmedv ~ ., data = boston, 
@@ -1297,7 +1302,7 @@ system.time(
   )
 )
 ```
-```{r, echo=FALSE}
+```{r boston-ranger-rsquared, echo=FALSE}
 boston_ranger$r.squared
 ```
 
