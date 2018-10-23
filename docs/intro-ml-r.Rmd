@@ -1,6 +1,6 @@
 ---
-title: "Introduction to Machine Learning in R"
-subtitle: "⚔<br/>"
+title: "Analytics Connect '18"
+subtitle: "Introduction to Machine Learning in R"
 author: "Brandon M. Greenwell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
@@ -87,16 +87,6 @@ for (pkg in pkgs) {
 ```
 
 ]
-
-
----
-class: clear, middle, center
-
---
-
-```{r lets-go, eval=FALSE, echo=FALSE, out.width="60%"}
-set.seed(4); RBitmoji::plot_comic(my_id, tag = "lets go")
-```
 
 
 ---
@@ -190,25 +180,6 @@ knitr::include_graphics("figures/vip-pdp-horizontal.png")
 
 ---
 
-class: clear, split-two white with-border
-
-.column.bg-purple[.content[
-  content of first column
-]]
-.column[.content[
-.split-two[
-.column.bg-black[.content.vmiddle.center[
-      This column just got chopped in half.
-     ]]
-.column.bg-indigo[.content.vmiddle.center[
-      This column just got chopped in half.
-     ]]
-]]]
-
-
-
----
-
 # Algorithmic interpretation
 
 ```{r black-box-02, echo=FALSE, out.width="100%"}
@@ -246,13 +217,13 @@ knitr::include_graphics("Figures/modeling_process2.png")
 
 ---
 
-# Two goals
+# Two goals in model development
 
 --
 
 .font150.pull-left[
 
-# Model selection
+## Model selection
 
 Estimating the *performance* of different models in order
 to choose the .bold["best" one]
@@ -263,7 +234,7 @@ to choose the .bold["best" one]
 
 .font150.pull-right[
 
-# Model assessment
+## Model assessment
 
 Having chosen a final model, estimating its prediction
 error (i.e., generalization error) on .bold[new data]
@@ -375,7 +346,7 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 # A handy flow chart
 
-```{r 02-flow-chart, echo=FALSE, out.width="100%"}
+```{r 02-flow-chart, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/flow-chart.png")
 ```
 
@@ -1883,7 +1854,6 @@ system.time(
     pred.var = c("lon", "nox"),
     recursive = FALSE,  #<<
     chull = TRUE, 
-    palette = "magma",
     n.trees = best_iter  #<<
   )
 )
@@ -1901,7 +1871,6 @@ system.time(
     pred.var = c("lon", "nox"),
     recursive = TRUE,  #<<
     chull = TRUE, 
-    palette = "magma",
     n.trees = best_iter  #<<
   )
 )

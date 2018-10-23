@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Introduction to Machine Learning in R</title>
+    <title>Analytics Connect ’18</title>
     <meta charset="utf-8">
     <meta name="author" content="Brandon M. Greenwell" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -13,8 +13,8 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Introduction to Machine Learning in R
-## ⚔<br/>
+# Analytics Connect ’18
+## Introduction to Machine Learning in R
 ### Brandon M. Greenwell
 ### 23 October, 2018
 
@@ -71,14 +71,6 @@ for (pkg in pkgs) {
 ```
 
 ]
-
-
----
-class: clear, middle, center
-
---
-
-
 
 
 ---
@@ -162,25 +154,6 @@ Aside from predictions, we are often interested in understanding the way that `\
 
 ---
 
-class: clear, split-two white with-border
-
-.column.bg-purple[.content[
-  content of first column
-]]
-.column[.content[
-.split-two[
-.column.bg-black[.content.vmiddle.center[
-      This column just got chopped in half.
-     ]]
-.column.bg-indigo[.content.vmiddle.center[
-      This column just got chopped in half.
-     ]]
-]]]
-
-
-
----
-
 # Algorithmic interpretation
 
 &lt;img src="figures/black-box-02.png" width="100%" style="display: block; margin: auto;" /&gt;
@@ -212,13 +185,13 @@ Before introducing any algorithms, we'll briefly cover concepts that are useful 
 
 ---
 
-# Two goals
+# Two goals in model development
 
 --
 
 .font150.pull-left[
 
-# Model selection
+## Model selection
 
 Estimating the *performance* of different models in order
 to choose the .bold["best" one]
@@ -229,7 +202,7 @@ to choose the .bold["best" one]
 
 .font150.pull-right[
 
-# Model assessment
+## Model assessment
 
 Having chosen a final model, estimating its prediction
 error (i.e., generalization error) on .bold[new data]
@@ -342,7 +315,7 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 # A handy flow chart
 
-&lt;img src="figures/flow-chart.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/flow-chart.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -1132,7 +1105,7 @@ system.time(
   )
 )
 ##    user  system elapsed 
-##   7.396   0.151   7.573
+##   6.744   0.158   6.918
 ```
 
 ```
@@ -1156,7 +1129,7 @@ system.time(
   )
 )
 ##    user  system elapsed 
-##   6.910   0.235   1.186
+##   7.109   0.267   1.387
 ```
 
 ```
@@ -1736,12 +1709,11 @@ system.time(
     pred.var = c("lon", "nox"),
 *   recursive = FALSE,
     chull = TRUE, 
-    palette = "magma",
 *   n.trees = best_iter
   )
 )
 ##    user  system elapsed 
-## 110.629   0.230 111.021
+## 108.363   0.254 108.722
 ```
 
 ]
@@ -1757,12 +1729,11 @@ system.time(
     pred.var = c("lon", "nox"),
 *   recursive = TRUE,
     chull = TRUE, 
-    palette = "magma",
 *   n.trees = best_iter
   )
 )
 ##    user  system elapsed 
-##   0.453   0.001   0.453
+##   0.453   0.000   0.454
 ```
 
 ]
