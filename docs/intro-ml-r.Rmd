@@ -1,7 +1,7 @@
 ---
 title: "Analytics Connect '18"
 subtitle: "Introduction to Machine Learning in R"
-author: "Brandon M. Greenwell"
+author: "Brandon M. Greenwell<br>Data Scientist / `r icon::fa('r-project')` `r icon::fa('user-ninja')`"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   xaringan::moon_reader:
