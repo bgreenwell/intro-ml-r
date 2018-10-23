@@ -483,8 +483,11 @@ mushroom$veil.type <- NULL  # only takes on a single value  #<<
 
 
 ---
+class: clear, middle
 
 # Mushroom classification
+
+.code125[
 
 ```{r mushroom-setup, echo=TRUE}
 # Load required packages
@@ -505,8 +508,11 @@ accuracy <- function(pred, obs) {
 }
 ```
 
+]
+
 
 ---
+class: clear, middle
 
 # Mushroom classification
 
@@ -611,16 +617,13 @@ prp(cart2,
 
 ---
 
-# A handy rule for mushrooms
+# A handy new rule for mushrooms
 
---
+<br><br><br><br>
 
-<br><br><br>
-.right[<div class="centered">
-<span style="color:Tomato"><font size="25">"If it smells bad, don't eat it!"</font></span>
-</div>]
+.right.font300.tomato["If it smells bad, don't eat it!"]
 <br>
-.right[-Decision Stump]
+.right.font200[-Decision Stump]
 
 
 ---
@@ -697,13 +700,14 @@ prp(spam_tree,
 
 
 ---
+class: clear, middle
 
 # Predicting email spam
 
 .pull-left[
 
 ```{r spam-vi}
-# Extract tibble of variable importance scores
+# Variable importance scores
 vip::vi(spam_tree)  #<<
 ```
 
@@ -712,7 +716,7 @@ vip::vi(spam_tree)  #<<
 .pull-right[
 
 ```{r spam-vip, out.width="100%"}
-# Construct ggplot2-based variable importance plot
+# Variable importance plot
 vip(spam_tree, num_features = 10)  #<<
 ```
 
@@ -727,17 +731,17 @@ vip(spam_tree, num_features = 10)  #<<
 
 ## Advantages:
 
-* <span style="color:MediumSeaGreen">Small trees are easy to interpret</span>
+* .MediumSeaGreen[Small trees are easy to interpret]
 
-* <span style="color:MediumSeaGreen">Trees scale well to large $N$</span> (fast!!)
+* .MediumSeaGreen[Trees scale well to large *N*] (fast!!)
 
-* <span style="color:MediumSeaGreen">Can handle data of all types</span> (i.e., requires little, if any, coding)
+* .MediumSeaGreen[Can handle data of all types] (i.e., requires little, if any, coding)
 
-* <span style="color:MediumSeaGreen">Automatic variable selection</span>
+* .MediumSeaGreen[Automatic variable selection]
 
-* <span style="color:MediumSeaGreen">Can handle missing data</span> (through *surrogate splits*)
+* .MediumSeaGreen[Can handle missing data] (through *surrogate splits*)
 
-* <span style="color:MediumSeaGreen">Completely nonparametric</span> (great for DM and EDA tasks!)
+* .MediumSeaGreen[Completely nonparametric] (great for DM and EDA tasks!)
 
 ]
 
@@ -747,24 +751,25 @@ vip(spam_tree, num_features = 10)  #<<
 
 ## Disadvantages:
 
-* <span style="color:Tomato">Large trees can be difficult to interpret</span>
+* .tomato[Large trees can be difficult to interpret]
 
-* <span style="color:Tomato">Trees are step functions</span> (i.e., binary splits)
+* .tomato[Trees are step functions] (i.e., binary splits)
 
-* <span style="color:Tomato">Greedy splitting algorithms</span> (i.e., trees are noisy)
+* .tomato[Greedy splitting algorithms] (i.e., trees are noisy)
 
-* <span style="color:Tomato">All splits depend on previous splits</span> (i.e., high order interactions)
+* .tomato[All splits depend on previous splits] (i.e., high order interactions)
 
-* <span style="color:Tomato">Data is essentially taken away after each split</span>
+* .tomato[Data is essentially taken away after each split]
 
 ]
 
 
 ---
+class: clear, middle, center
 
 # How do trees measure up?
 
-```{r fig-characteristics, echo=FALSE, out.width="65%"}
+```{r fig-characteristics, echo=FALSE, out.width="70%"}
 knitr::include_graphics("figures/esl-tbl.png")
 ```
 <br>
@@ -792,16 +797,16 @@ knitr::include_graphics("figures/esl-tbl.png")
 <br>
 
 <center>
-<font size="8"><span style="color:DarkBlue">Boosting</span> >= <span style="color:MediumSeaGreen">Random forest</span> > <span style="color:MediumOrchid ">Bagging</span> > <span style="color:DarkOrange">Single tree</span></font>
+<font size="6"><span style="color:DarkBlue">Boosting</span> >= <span style="color:MediumSeaGreen">Random forest</span> > <span style="color:MediumOrchid ">Bagging</span> > <span style="color:DarkOrange">Single tree</span></font>
 </center>
 
 
 ---
-class: inverse, center, middle
+class: clear, center, middle
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Fog_forrest_frickberg.jpg)
 
-# Bagging
+.font300.white[Bagging]
 
 ???
 

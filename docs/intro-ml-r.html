@@ -447,8 +447,11 @@ mushroom &lt;- read.csv(url)  # load the data from GitHub
 
 
 ---
+class: clear, middle
 
 # Mushroom classification
+
+.code125[
 
 
 ```r
@@ -470,8 +473,11 @@ accuracy &lt;- function(pred, obs) {
 }
 ```
 
+]
+
 
 ---
+class: clear, middle
 
 # Mushroom classification
 
@@ -551,16 +557,13 @@ Optimal tree (test error = 0%):
 
 ---
 
-# A handy rule for mushrooms
+# A handy new rule for mushrooms
 
---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-.right[&lt;div class="centered"&gt;
-&lt;span style="color:Tomato"&gt;&lt;font size="25"&gt;"If it smells bad, don't eat it!"&lt;/font&gt;&lt;/span&gt;
-&lt;/div&gt;]
+.right.font300.tomato["If it smells bad, don't eat it!"]
 &lt;br&gt;
-.right[-Decision Stump]
+.right.font200[-Decision Stump]
 
 
 ---
@@ -626,6 +629,7 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 
 ---
+class: clear, middle
 
 # Predicting email spam
 
@@ -633,22 +637,22 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 
 ```r
-# Extract tibble of variable importance scores
+# Variable importance scores
 *vip::vi(spam_tree)
-## # A tibble: 48 x 2
+## [38;5;246m# A tibble: 48 x 2[39m
 ##    Variable        Importance
-##    &lt;chr&gt;                &lt;dbl&gt;
-##  1 charExclamation      508. 
-##  2 capitalLong          260. 
-##  3 capitalAve           199. 
-##  4 free                 198. 
-##  5 charDollar           195. 
-##  6 your                 183. 
-##  7 remove               177. 
-##  8 all                  127. 
-##  9 capitalTotal         108. 
-## 10 hp                    74.3
-## # ... with 38 more rows
+##    [3m[38;5;246m&lt;chr&gt;[39m[23m                [3m[38;5;246m&lt;dbl&gt;[39m[23m
+## [38;5;250m 1[39m charExclamation      508. 
+## [38;5;250m 2[39m capitalLong          260. 
+## [38;5;250m 3[39m capitalAve           199. 
+## [38;5;250m 4[39m free                 198. 
+## [38;5;250m 5[39m charDollar           195. 
+## [38;5;250m 6[39m your                 183. 
+## [38;5;250m 7[39m remove               177. 
+## [38;5;250m 8[39m all                  127. 
+## [38;5;250m 9[39m capitalTotal         108. 
+## [38;5;250m10[39m hp                    74.3
+## [38;5;246m# ... with 38 more rows[39m
 ```
 
 ]
@@ -657,7 +661,7 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 
 ```r
-# Construct ggplot2-based variable importance plot
+# Variable importance plot
 *vip(spam_tree, num_features = 10)
 ```
 
@@ -674,17 +678,17 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 ## Advantages:
 
-* &lt;span style="color:MediumSeaGreen"&gt;Small trees are easy to interpret&lt;/span&gt;
+* .MediumSeaGreen[Small trees are easy to interpret]
 
-* &lt;span style="color:MediumSeaGreen"&gt;Trees scale well to large `\(N\)`&lt;/span&gt; (fast!!)
+* .MediumSeaGreen[Trees scale well to large *N*] (fast!!)
 
-* &lt;span style="color:MediumSeaGreen"&gt;Can handle data of all types&lt;/span&gt; (i.e., requires little, if any, coding)
+* .MediumSeaGreen[Can handle data of all types] (i.e., requires little, if any, coding)
 
-* &lt;span style="color:MediumSeaGreen"&gt;Automatic variable selection&lt;/span&gt;
+* .MediumSeaGreen[Automatic variable selection]
 
-* &lt;span style="color:MediumSeaGreen"&gt;Can handle missing data&lt;/span&gt; (through *surrogate splits*)
+* .MediumSeaGreen[Can handle missing data] (through *surrogate splits*)
 
-* &lt;span style="color:MediumSeaGreen"&gt;Completely nonparametric&lt;/span&gt; (great for DM and EDA tasks!)
+* .MediumSeaGreen[Completely nonparametric] (great for DM and EDA tasks!)
 
 ]
 
@@ -694,24 +698,25 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 ## Disadvantages:
 
-* &lt;span style="color:Tomato"&gt;Large trees can be difficult to interpret&lt;/span&gt;
+* .tomato[Large trees can be difficult to interpret]
 
-* &lt;span style="color:Tomato"&gt;Trees are step functions&lt;/span&gt; (i.e., binary splits)
+* .tomato[Trees are step functions] (i.e., binary splits)
 
-* &lt;span style="color:Tomato"&gt;Greedy splitting algorithms&lt;/span&gt; (i.e., trees are noisy)
+* .tomato[Greedy splitting algorithms] (i.e., trees are noisy)
 
-* &lt;span style="color:Tomato"&gt;All splits depend on previous splits&lt;/span&gt; (i.e., high order interactions)
+* .tomato[All splits depend on previous splits] (i.e., high order interactions)
 
-* &lt;span style="color:Tomato"&gt;Data is essentially taken away after each split&lt;/span&gt;
+* .tomato[Data is essentially taken away after each split]
 
 ]
 
 
 ---
+class: clear, middle, center
 
 # How do trees measure up?
 
-&lt;img src="figures/esl-tbl.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/esl-tbl.png" width="70%" style="display: block; margin: auto;" /&gt;
 &lt;br&gt;
 .center[**Source:** The Elements of Statistical Learning, Second Edition]
 
@@ -737,16 +742,16 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 &lt;br&gt;
 
 &lt;center&gt;
-&lt;font size="8"&gt;&lt;span style="color:DarkBlue"&gt;Boosting&lt;/span&gt; &gt;= &lt;span style="color:MediumSeaGreen"&gt;Random forest&lt;/span&gt; &gt; &lt;span style="color:MediumOrchid "&gt;Bagging&lt;/span&gt; &gt; &lt;span style="color:DarkOrange"&gt;Single tree&lt;/span&gt;&lt;/font&gt;
+&lt;font size="6"&gt;&lt;span style="color:DarkBlue"&gt;Boosting&lt;/span&gt; &gt;= &lt;span style="color:MediumSeaGreen"&gt;Random forest&lt;/span&gt; &gt; &lt;span style="color:MediumOrchid "&gt;Bagging&lt;/span&gt; &gt; &lt;span style="color:DarkOrange"&gt;Single tree&lt;/span&gt;&lt;/font&gt;
 &lt;/center&gt;
 
 
 ---
-class: inverse, center, middle
+class: clear, center, middle
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Fog_forrest_frickberg.jpg)
 
-# Bagging
+.font300.white[Bagging]
 
 ???
 
