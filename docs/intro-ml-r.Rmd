@@ -201,6 +201,103 @@ knitr::include_graphics("figures/black-box-03.png")
 
 ---
 
+# Overfitting
+
+.font150[
+
+It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process *overfitting*.
+
+]
+
+```{r overfitting-linear-regression, echo=FALSE, fig.width=7, fig.height=7/3, out.width="100%"}
+# Simulate some data 
+n <- 100
+set.seed(8451)
+trn <- tibble::tibble(
+  x = runif(n, min = -2, max = 2),
+  y = rnorm(n, mean = 1 + 2*x + x^2, sd = 1)
+)
+tst <- tibble::tibble(
+  x = runif(n = 1000, min = -2, max = 2),
+  y = rnorm(n = 1000, mean = 1 + 2*x + x^2, sd = 1)
+)
+p <- ggplot(df, aes(x, y)) + 
+  geom_point(alpha = 0.5) + 
+  theme_light()
+p1 <- p + 
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
+  ggtitle("Under fitting")
+p2 <- p + 
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE) +
+  ggtitle("Just right?")
+p3 <- p + 
+  geom_smooth(method = "loess", span = 0.1, se = FALSE) +
+  ggtitle("Over fitting")
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
+```
+
+
+---
+class: clear, middle, center
+
+.font150[
+
+Generalization error $\approx$ $\sigma^2$ $+$ .red.vold[Bias] $+$ .red.vold[Variance] 
+
+]
+
+```{r bias-variance-tradeoff, echo=FALSE, fig.width=6, fig.asp=0.618, out.width="80%"}
+# Load required packages
+library(mlbench)
+library(ggplot2)
+library(tidyr)
+
+# Simulate data
+set.seed(8451)
+trn <- as.data.frame(mlbench.friedman1(1000, sd = 1))#[, c(1:5, 11)]
+tst <- as.data.frame(mlbench.friedman1(1000, sd = 1))#[, c(1:5, 11)]
+
+# Run K-nn simulation
+k <- seq(from = 2, to = 30, by = 1)
+res <- matrix(NA, nrow = length(k), ncol = 3, 
+              dimnames = list(NULL, c("k", "Train", "Test")))
+for (i in seq_along(k)) {
+  fit <- caret::knnreg(y ~ ., k = k[i], data = trn)
+  res[i, "k"] <- k[i]
+  res[i, "Train"] <- caret::RMSE(predict(fit, newdata = trn), trn$y)
+  res[i, "Test"] <- caret::RMSE(predict(fit, newdata = tst), tst$y)
+}
+res <- res %>%
+  as.data.frame() %>%
+  gather(key = "sample", value = "rmse", -k)
+
+# Plot results
+best <- min(res[res[, "sample"] == "Test", "rmse"])
+ggplot(res, aes(x = 1/k, y = 1/rmse, color = sample)) +
+  geom_line(size = 1) +
+  geom_hline(yintercept = 1/best, linetype = "dashed") +
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("Model complexity") +
+  ylab("Model performance") +
+  theme_light() +
+  ggtitle("Bias-variance tradeoff") +
+  annotate("text", x = 0.042, y = 0.44, label = "High Bias\nLow Variance", 
+           col = "grey30", size = 5) +
+  annotate("text", x = 0.39, y = 0.44, label = "Low Bias\nHigh Variance",
+           col = "grey30", size = 5) +
+  theme(legend.title = element_blank(),
+        legend.position = c(0.1, 0.85),
+        legend.text = element_text(size = 10),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
+
+
+---
+
 # Two goals in model development
 
 --
@@ -210,7 +307,9 @@ knitr::include_graphics("figures/black-box-03.png")
 ## Model selection
 
 Estimating the *performance* of different models in order
-to choose the .bold["best" one]
+to choose the .bold["best"] one
+
+* Choosing *hyperparmaters*
 
 ]
 
@@ -270,14 +369,11 @@ It is difficult to give a general rule of `r emo::ji("thumbs up")` on how to cho
 
 # Data splitting
 
-.full-width.content-box-yellow.font150.center[What if we don't have enough data for training, validation,and testing?]
+.full-width.content-box-yellow.font150.center[What if we don't have enough data for training, validation, and testing?]
 
+--
 
----
-
-# Data splitting strategies
-
-<br><br>
+<br>
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/data-splitting.png")

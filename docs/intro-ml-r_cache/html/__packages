@@ -17,3 +17,6 @@ xgboost
 plotly
 xaringan
 vip
+mlbench
+nlme
+mgcv
