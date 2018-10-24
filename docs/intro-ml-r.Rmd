@@ -240,7 +240,7 @@ gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 ---
 class: clear, middle, center
 
-.font150[
+.font200[
 
 Generalization error $\approx$ $\sigma^2$ $+$ .red.vold[Bias] $+$ .red.vold[Variance] 
 
