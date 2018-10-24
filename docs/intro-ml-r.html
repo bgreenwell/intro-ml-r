@@ -299,7 +299,7 @@ library(rsample)  # for data splitting
 # Make sure that you get the same random numbers
 set.seed(123)
 data_split &lt;- initial_split(
-  pdp::boston, prop = .7, strata = "cmedv"
+  pdp::boston, prop = 0.7, strata = "cmedv"
 )
 
 boston_train &lt;- training(data_split)  # train
