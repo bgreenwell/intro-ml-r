@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Introduction to Machine Learning in <i class="fab  fa-r-project "></i> <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453" style="height:1em; width:auto; "/&gt;</span></title>
+    <title>Introduction to Machine learning in <i class="fab  fa-r-project "></i> <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453" style="height:1em; width:auto; "/&gt;</span></title>
     <meta charset="utf-8">
     <meta name="author" content="Brandon M. Greenwell Enable the Science/Data Scientist <span>&lt;i class="fab  fa-github faa-vertical animated "&gt;&lt;/i&gt;</span> Fork me on GitHub <span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;@bgreenwell8</span>" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -16,18 +16,35 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Introduction to Machine Learning in <i class="fab  fa-r-project "></i> <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453" style="height:1em; width:auto; "/&gt;</span>
+# Introduction to Machine learning in <i class="fab  fa-r-project "></i> <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453" style="height:1em; width:auto; "/&gt;</span>
 ## Analytics Connect ’18
 ### Brandon M. Greenwell<br>Enable the Science/Data Scientist<br><a href="https://github.com/bgreenwell/intro-ml-r"><span>&lt;i class="fab  fa-github faa-vertical animated "&gt;&lt;/i&gt;</span> Fork me on GitHub</a><br><a href="https://twitter.com/bgreenwell8"><span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;@bgreenwell8</span></a>
 
 ---
 
-class: clear
+class: clear, split-two
 
 
 
-background-image: url(https://images-na.ssl-images-amazon.com/images/I/71iK6wQfd4L._UL1500_.jpg?fifu)
-background-size: 70%
+# Overview
+
+.column.bg-main1[.content.vmiddle.center[
+
+&lt;center&gt;
+ &lt;img src="figures/isl.jpg", width="70%"&gt;
+
+.font150[[Book website](http://www-bcf.usc.edu/~gareth/ISL/)]
+
+]]
+
+.column.bg-main2[.content.vmiddle.center[
+
+&lt;center&gt;
+ &lt;img src="figures/esl.jpg", width="70%"&gt;
+
+.font150[[Book website](https://web.stanford.edu/~hastie/ElemStatLearn/)]
+
+]]
 
 
 ---
@@ -42,7 +59,7 @@ class: clear, center, middle
 
 .font150[
 
-* .purple[Machine learning]: construcintg algorithms that learn from data
+* .purple[Machine learning]: constructing algorithms that learn from data
 
 * .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
 
@@ -65,7 +82,7 @@ class: clear, center, middle
 
 * Many flexible tools for making predictions from data
 
-* They are not magick! They require **good data** and proper validation
+* They are not magic! They require **good data** and proper validation
 
 * Model fitting (and validation) takes longer with "big data" ⏳
 
@@ -114,7 +131,7 @@ for (pkg in pkgs) {
 ---
 class: clear, inverse, center, middle
 
-&lt;img src="figures/fundamentals.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/fundamentals.jpg" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -225,7 +242,7 @@ It is possible to "over tune" your models to maximize performance on the trainin
 
 ]
 
-&lt;img src="intro-ml-r_files/figure-html/overfitting-linear-regression-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/overfitting-linear-regression-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -237,7 +254,7 @@ Generalization error `\(\approx\)` `\(\sigma^2\)` `\(+\)` .red.vold[Bias] `\(+\)
 
 ]
 
-&lt;img src="intro-ml-r_files/figure-html/bias-variance-tradeoff-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bias-variance-tradeoff-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -287,7 +304,7 @@ error (i.e., generalization error) on .bold[new data]
 
 * The .bold[training set] is used to fit the models
 
-* Tthe .bold[validation set] is used to estimate prediction error for model selection
+* The .bold[validation set] is used to estimate prediction error for model selection
 
 * The .bold[test set] is used for assessment of the generalization error of the final chosen model
 
@@ -313,11 +330,7 @@ It is difficult to give a general rule of 👍 on how to choose the number of ob
 
 # Data splitting
 
-.full-width.content-box-yellow.font150.center[What if we don't have enough data for training, validation, and testing?]
-
---
-
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 
 &lt;img src="figures/data-splitting.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -371,7 +384,7 @@ ggplot(boston_train, aes(x = cmedv)) +
   geom_density(data = boston_test, trim = TRUE, col = "red")
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/sampling-distribution-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/sampling-distribution-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -399,7 +412,7 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 * Prone to over fitting 
 
-    - Need to regularize or otherwise reduce the number fetures
+    - Need to regularize or otherwise reduce the number features
 
 ]
 
@@ -430,10 +443,35 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 ---
 
-Data preprocessing
+# Data preprocessing and feature engineering
 
+.pull-left[
 
+.font100[
 
+Once data are gathered, it must be cleaned and prepped for data analysis. Such tasks might include, but are not limited to:
+
+* Imputing missing values
+
+* Transforming columns
+
+* Standardizing/normalizing columns
+
+* Creating new features
+
+* Formulating interaction effects
+
+* Numerically encoding categorical features (e.g., *one-hot encoding* or *dummy encoding*)
+
+]
+
+]
+
+.pull-right[
+
+&lt;img src="intro-ml-r_files/figure-html/ames-sale-price-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
 
 
 ---
@@ -647,14 +685,14 @@ accuracy(
 .pull-left[
 
 Decision stump (test error = 1.53%):
-&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-1-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
 
 Optimal tree (test error = 0%):
-&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-2-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -727,7 +765,7 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 .scrollable[
 
-&lt;img src="intro-ml-r_files/figure-html/spam-tree-diagram-1.svg" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/spam-tree-diagram-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -743,20 +781,20 @@ class: clear, middle
 ```r
 # Variable importance scores
 *vip::vi(spam_tree)
-## [90m# A tibble: 48 x 2[39m
+## [38;5;246m# A tibble: 48 x 2[39m
 ##    Variable        Importance
-##    [3m[90m&lt;chr&gt;[39m[23m                [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m charExclamation      508. 
-## [90m 2[39m capitalLong          260. 
-## [90m 3[39m capitalAve           199. 
-## [90m 4[39m free                 198. 
-## [90m 5[39m charDollar           195. 
-## [90m 6[39m your                 183. 
-## [90m 7[39m remove               177. 
-## [90m 8[39m all                  127. 
-## [90m 9[39m capitalTotal         108. 
-## [90m10[39m hp                    74.3
-## [90m# ... with 38 more rows[39m
+##    [3m[38;5;246m&lt;chr&gt;[39m[23m                [3m[38;5;246m&lt;dbl&gt;[39m[23m
+## [38;5;250m 1[39m charExclamation      508. 
+## [38;5;250m 2[39m capitalLong          260. 
+## [38;5;250m 3[39m capitalAve           199. 
+## [38;5;250m 4[39m free                 198. 
+## [38;5;250m 5[39m charDollar           195. 
+## [38;5;250m 6[39m your                 183. 
+## [38;5;250m 7[39m remove               177. 
+## [38;5;250m 8[39m all                  127. 
+## [38;5;250m 9[39m capitalTotal         108. 
+## [38;5;250m10[39m hp                    74.3
+## [38;5;246m# ... with 38 more rows[39m
 ```
 
 ]
@@ -769,7 +807,7 @@ class: clear, middle
 *vip(spam_tree, num_features = 10)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/spam-vip-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/spam-vip-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -897,28 +935,28 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 # Bagging trees
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-1-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-1-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Trees are step functions
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-2-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Trees are noisy
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-3-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Bagging reduces variance
 
-&lt;img src="intro-ml-r_files/figure-html/bagging-4-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/bagging-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -950,7 +988,7 @@ spam_bag &lt;- randomForest(
 
 .pull-right[
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-6-1.gif" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-5-1.gif" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1086,7 +1124,7 @@ spam_rf &lt;- randomForest(
 
 .pull-right[
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-8-1.svg" width="400" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-7-1.gif" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1166,7 +1204,7 @@ class: clear, middle, center
 # Predicting email spam
 
 .font150.bold.left[OOB vs. test error: e-mail spam example]
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1236,7 +1274,7 @@ system.time(
   )
 )
 ##    user  system elapsed 
-##   6.744   0.158   6.918
+##   7.112   0.167   7.288
 ```
 
 ```
@@ -1260,7 +1298,7 @@ system.time(
   )
 )
 ##    user  system elapsed 
-##   7.109   0.267   1.387
+##   6.448   0.242   1.108
 ```
 
 ```
@@ -1311,7 +1349,7 @@ par(mfrow = c(1, 2))  # side-by-side plots
 *varImpPlot(boston_rf, main = "")  # randomForest::varImpPlot()
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston-rf-varImpPlot-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston-rf-varImpPlot-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1329,7 +1367,7 @@ p3 &lt;- vip(boston_ranger) + ggtitle("ranger")
 *grid.arrange(p1, p2, p3, ncol = 3)  # side-by-side plots
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston-rf-vip-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston-rf-vip-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1406,7 +1444,7 @@ p2 &lt;- partial(boston_ranger, pred.var = "rm", plot = TRUE)
 grid.arrange(p1, p2, p3, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston-rf-pdps-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston-rf-pdps-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1457,7 +1495,7 @@ class: clear, middle
 grid.arrange(p1, p2, p3, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-13-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1476,7 +1514,7 @@ grid.arrange(p1, p2, p3, ncol = 3)
 ---
 class: clear, middle, center
 
-&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-3-1.svg" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-3-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1539,7 +1577,7 @@ banknote_rf$confusion
 heatmap(1 - banknote_rf$proximity, col = viridis::plasma(256))
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/heatmap-1.svg" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/heatmap-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1570,7 +1608,7 @@ ggplot(outlyingness, aes(x = obs, y = out)) +
 
 .pull-right[
 
-&lt;img src="intro-ml-r_files/figure-html/outlier-plot-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/outlier-plot-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1585,7 +1623,7 @@ ggplot(outlyingness, aes(x = obs, y = out)) +
 MDSplot(banknote_rf, fac = as.factor(banknote$Y), k = 2, cex = 1.5)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/MDS-1.svg" width="45%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/MDS-1.png" width="45%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1755,7 +1793,7 @@ class: clear, center, middle
 
 * [mboost](https://github.com/boost-R): **m**odel-based **boost**ing
 
-    - Implements tools for fitting and evaluating a variety of regression and classification models (somewhere between GLMs/GAMs and GBMs)
+    - Implements tools for fitting and evaluating a variety of regression and classification models (somewhere between GzLMs/GAMs and GBMs)
 
 ]
 
@@ -1822,7 +1860,7 @@ best_iter &lt;- gbm.perf(  # how many trees?
 )
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston_gbm_best-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston_gbm_best-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1844,7 +1882,7 @@ system.time(
   )
 )
 ##    user  system elapsed 
-## 108.363   0.254 108.722
+## 108.566   0.264 108.911
 ```
 
 ]
@@ -1864,7 +1902,7 @@ system.time(
   )
 )
 ##    user  system elapsed 
-##   0.453   0.000   0.454
+##   0.463   0.001   0.464
 ```
 
 ]
@@ -1880,7 +1918,7 @@ system.time(
 grid.arrange(autoplot(pd1), autoplot(pd2), ncol = 2)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/boston-pdps-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/boston-pdps-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1911,7 +1949,7 @@ ggplot(ames, aes(x = Sale_Price, y = Overall_Qual)) +
   theme_light() + theme(legend.position = "none")
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/ames-densities-1.svg" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/ames-densities-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 **Source:** [Bradley Boehmke](https://github.com/bradleyboehmke)
 
@@ -1960,7 +1998,7 @@ ames_xgb &lt;- xgboost(         # tune using `xgb.cv()`
 ---
 class: clear, middle
 
-&lt;img src="intro-ml-r_files/figure-html/ames-xgboost-cv-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/ames-xgboost-cv-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1975,7 +2013,7 @@ p3 &lt;- vip(ames_xgb, feature_names = colnames(X), type = "Frequency")
 grid.arrange(p1, p2, p3, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/xgboost-vip-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/xgboost-vip-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2001,7 +2039,7 @@ vip(
 
 .pull-right[
 
-&lt;img src="intro-ml-r_files/figure-html/xgboost-vip-3-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/xgboost-vip-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -2021,7 +2059,7 @@ p6 &lt;- autoplot(oq_ice, alpha = 0.1)
 grid.arrange(p4, p5, p6, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2031,7 +2069,7 @@ class: clear, middle, center
 
 .font200.center[Variable effect and variable importance]
 
-&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-vi-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/xgboost-pdp-vi-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---

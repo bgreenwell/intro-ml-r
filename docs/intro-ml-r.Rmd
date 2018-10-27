@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Machine Learning in `r icon::fa('r-project')` `r anicon::cia('https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453', animate=FALSE, size=1, border=F)`"
+title: "Introduction to Machine learning in `r icon::fa('r-project')` `r anicon::cia('https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453', animate=FALSE, size=1, border=F)`"
 subtitle: "Analytics Connect '18"
 author: "Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa('github', animate='vertical')` Fork me on GitHub](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa('twitter', animate='float', rtext='@bgreenwell8')`](https://twitter.com/bgreenwell8)"
 output:
@@ -13,7 +13,7 @@ output:
       highlightLines: true
       countIncrementalSlides: true
 ---
-class: clear
+class: clear, split-two
 
 ```{r setup, include=FALSE}
 # Set global R options
@@ -22,7 +22,7 @@ options(htmltools.dir.version = FALSE, servr.daemon = TRUE,
 
 # Set global knitr chunk options
 knitr::opts_chunk$set(
-  dev = "svg",
+  dev = "png",
   fig.align = "center",
   cache = TRUE,
   error = FALSE,
@@ -40,8 +40,25 @@ library(vip)
 my_id <- "1551b314-5e8a-4477-aca2-088c05963111-v1"
 ```
 
-background-image: url(https://images-na.ssl-images-amazon.com/images/I/71iK6wQfd4L._UL1500_.jpg?fifu)
-background-size: 70%
+# Overview
+
+.column.bg-main1[.content.vmiddle.center[
+
+<center>
+ <img src="figures/isl.jpg", width="70%">
+
+.font150[[Book website](http://www-bcf.usc.edu/~gareth/ISL/)]
+
+]]
+
+.column.bg-main2[.content.vmiddle.center[
+
+<center>
+ <img src="figures/esl.jpg", width="70%">
+
+.font150[[Book website](https://web.stanford.edu/~hastie/ElemStatLearn/)]
+
+]]
 
 
 ---
@@ -56,7 +73,7 @@ class: clear, center, middle
 
 .font150[
 
-* .purple[Machine learning]: construcintg algorithms that learn from data
+* .purple[Machine learning]: constructing algorithms that learn from data
 
 * .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
 
@@ -79,7 +96,7 @@ class: clear, center, middle
 
 * Many flexible tools for making predictions from data
 
-* They are not magick! They require **good data** and proper validation
+* They are not magic! They require **good data** and proper validation
 
 * Model fitting (and validation) takes longer with "big data" `r emo::ji("time")`
 
@@ -127,7 +144,7 @@ for (pkg in pkgs) {
 ---
 class: clear, inverse, center, middle
 
-```{r fundamentals, echo=FALSE, out.width="80%"}
+```{r fundamentals, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/fundamentals.jpg")
 ```
 
@@ -256,13 +273,9 @@ It is possible to "over tune" your models to maximize performance on the trainin
 # Simulate some data 
 n <- 100
 set.seed(8451)
-trn <- tibble::tibble(
+df <- tibble::tibble(
   x = runif(n, min = -2, max = 2),
   y = rnorm(n, mean = 1 + 2*x + x^2, sd = 1)
-)
-tst <- tibble::tibble(
-  x = runif(n = 1000, min = -2, max = 2),
-  y = rnorm(n = 1000, mean = 1 + 2*x + x^2, sd = 1)
 )
 p <- ggplot(df, aes(x, y)) + 
   geom_point(alpha = 0.5) + 
@@ -386,7 +399,7 @@ error (i.e., generalization error) on .bold[new data]
 
 * The .bold[training set] is used to fit the models
 
-* Tthe .bold[validation set] is used to estimate prediction error for model selection
+* The .bold[validation set] is used to estimate prediction error for model selection
 
 * The .bold[test set] is used for assessment of the generalization error of the final chosen model
 
@@ -412,11 +425,7 @@ It is difficult to give a general rule of `r emo::ji("thumbs up")` on how to cho
 
 # Data splitting
 
-.full-width.content-box-yellow.font150.center[What if we don't have enough data for training, validation, and testing?]
-
---
-
-<br>
+<br><br>
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/data-splitting.png")
@@ -501,7 +510,7 @@ knitr::include_graphics("figures/wide-data.png")
 
 * Prone to over fitting 
 
-    - Need to regularize or otherwise reduce the number fetures
+    - Need to regularize or otherwise reduce the number features
 
 ]
 
@@ -534,12 +543,49 @@ knitr::include_graphics("figures/tall-data.png")
 
 ---
 
-Data preprocessing
+# Data preprocessing and feature engineering
 
-```{r}
+.pull-left[
 
+.font100[
+
+Once data are gathered, it must be cleaned and prepped for data analysis. Such tasks might include, but are not limited to:
+
+* Imputing missing values
+
+* Transforming columns
+
+* Standardizing/normalizing columns
+
+* Creating new features
+
+* Formulating interaction effects
+
+* Numerically encoding categorical features (e.g., *one-hot encoding* or *dummy encoding*)
+
+]
+
+]
+
+.pull-right[
+
+```{r ames-sale-price, echo=FALSE, fig.width=4, fig.asp=2*0.618, out.width="100%"}
+p1 <- ggplot(ames, aes(x = Sale_Price, y = ..density..)) +
+  geom_histogram(bins = 20, fill = "dodgerblue2", color = "white") +
+  # geom_density() +
+  scale_x_continuous(name = "Sale price ($K)",
+                     labels = function(x) paste0(floor(x/1000))) +
+  theme_light() +
+  ggtitle("Skew right")
+p2 <- ggplot(ames, aes(x = log(Sale_Price), y = ..density..)) +
+  geom_histogram(bins = 20, fill = "dodgerblue2", color = "white") +
+  # geom_density() +
+  theme_light() +
+  ggtitle("More symmetric")
+grid.arrange(p1, p2, ncol = 1)
 ```
 
+]
 
 
 ---
@@ -1131,26 +1177,13 @@ spam_bag <- randomForest(
 
 .pull-right[
 
-```{r, echo=FALSE, fig.width=4, fig.asp=1, out.width="100%", animation.hook="gifski", dev="png"}
+```{r, echo=FALSE, fig.width=4, fig.asp=1, out.width="100%"}
 # Load required packages
 library(gganimate)
 
 # Compute test error
 pred <- predict(spam_bag, newdata = xtst, type = "class")
 spam_bag_acc <- accuracy(pred = pred, obs = tst$type)
-
-# Plot test error
-dark2 <- RColorBrewer::brewer.pal(8, "Dark2")
-# par(mar = c(4, 4, 0.1, 0.1))
-# plot(seq_len(spam_bag$ntree), spam_bag$test$err.rate[, "Test"], type = "l", 
-#      col = dark2[1L], ylim = c(0.04, 0.11), las = 1,
-#      ylab = "Test error", xlab = "Number of trees")
-# abline(h = 1 - spam_tree_acc, lty = 2, col = "black")
-# abline(h = 1 - spam_bag_acc, lty = 2, col = dark2[1L])
-# legend("topright", c("Single tree", "Bagging"),
-#        col = c("black", dark2[1L]), lty = c(2, 1), lwd = 1)
-# df <- data.frame(tree = seq_len(spam_bag$ntree), 
-#                  error = spam_bag$test$err.rate[, "Test"])
 
 # Tidy test error data
 df <- spam_bag$test$err.rate %>%
@@ -1166,18 +1199,19 @@ df <- spam_bag$test$err.rate %>%
   )
 
 # Animate test error progression
-ggplot(df, aes(x = num_trees, y = error, color = type)) +
+p <- ggplot(df, aes(x = num_trees, y = error, color = type)) +
   geom_path() +
   scale_colour_brewer(palette = "Dark2") +
   geom_hline(yintercept = 1 - spam_tree_acc, linetype = 2, color = "black") +
   geom_hline(yintercept = 1 - spam_bag_acc, linetype = 2, color = dark2[2L]) +
   theme_light() +
   theme(legend.title = element_blank(),
-        legend.position = c(0.8, 0.8)) +
+        legend.position = c(0.9, 0.9)) +
   xlab("Number of trees") +
   ylab("Test error") +
   ylim(0.04, 0.11) +
   transition_reveal(id = type, along = num_trees)
+animate(p, renderer = gifski_renderer(), device = "png")
 ```
 
 ]
@@ -1313,22 +1347,43 @@ spam_rf <- randomForest(
 
 .pull-right[
 
-```{r, echo=FALSE, out.width="400"}
+```{r, echo=FALSE, fig.width=4, fig.asp=1, out.width="100%"}
 # Compute test error
 pred <- predict(spam_rf, newdata = xtst, type = "class")
 spam_rf_acc <- accuracy(pred = pred, obs = tst$type)
 
-# Plot test error
-par(mar = c(4, 4, 0.1, 0.1))
-plot(seq_len(spam_rf$ntree), spam_rf$test$err.rate[, "Test"], type = "l", 
-     col = dark2[4L], ylim = c(0.04, 0.11), 
-     ylab = "Test error", xlab = "Number of trees")
-lines(seq_len(spam_rf$ntree), spam_bag$test$err.rate[, "Test"], col = dark2[1L])
-abline(h = 1 - spam_tree_acc, lty = 2, col = "black")
-abline(h = 1 - spam_bag_acc, lty = 2, col = dark2[1L])
-abline(h = 1 - spam_rf_acc, lty = 2, col = dark2[4L])
-legend("topright", c("Single tree", "Bagging", "Random forest"),
-       col = c("black", dark2[c(1, 4)]), lty = c(2, 1, 1), lwd = 1)
+# Tidy test error data
+df1 <- spam_bag$test$err.rate %>%
+  as.data.frame() %>%
+  dplyr::select(error = Test) %>%
+  tibble::rowid_to_column("num_trees") %>%
+  dplyr::mutate(
+    type = "Bagging"
+  )
+df2 <- spam_rf$test$err.rate %>%
+  as.data.frame() %>%
+  dplyr::select(error = Test) %>%
+  tibble::rowid_to_column("num_trees") %>%
+  dplyr::mutate(
+    type = "Random forest"
+  )
+df <- dplyr::bind_rows(df1, df2)
+
+# Animate test error progression
+p <- ggplot(df, aes(x = num_trees, y = error, color = type)) +
+  geom_path() +
+  scale_colour_brewer(palette = "Dark2") +
+  geom_hline(yintercept = 1 - spam_tree_acc, linetype = 2, color = "black") +
+  geom_hline(yintercept = 1 - spam_bag_acc, linetype = 2, color = dark2[1L]) +
+  geom_hline(yintercept = 1 - spam_rf_acc, linetype = 2, color = dark2[2L]) +
+  theme_light() +
+  theme(legend.title = element_blank(),
+        legend.position = c(0.9, 0.9)) +
+  xlab("Number of trees") +
+  ylab("Test error") +
+  ylim(0.04, 0.11) +
+  transition_reveal(id = type, along = num_trees)
+animate(p, renderer = gifski_renderer(), device = "png")
 ```
 
 ]
@@ -2014,7 +2069,7 @@ knitr::include_graphics("figures/gpu.jpg")
 
 * [mboost](https://github.com/boost-R): **m**odel-based **boost**ing
 
-    - Implements tools for fitting and evaluating a variety of regression and classification models (somewhere between GLMs/GAMs and GBMs)
+    - Implements tools for fitting and evaluating a variety of regression and classification models (somewhere between GzLMs/GAMs and GBMs)
 
 ]
 
