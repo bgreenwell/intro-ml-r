@@ -1,8 +1,7 @@
 ---
-title: "Analytics Connect '18:"
-subtitle: "Introduction to Machine Learning in R"
-author: "Brandon M. Greenwell<br>[`r anicon::faa('github', animate='vertical')` Fork me on GitHub](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa('twitter', animate='float', rtext='@bgreenwell8')`](https://twitter.com/bgreenwell8)"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+title: "Introduction to Machine Learning in `r icon::fa('r-project')` `r anicon::cia('https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453', animate=FALSE, size=1, border=F)`"
+subtitle: "Analytics Connect '18"
+author: "Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa('github', animate='vertical')` Fork me on GitHub](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa('twitter', animate='float', rtext='@bgreenwell8')`](https://twitter.com/bgreenwell8)"
 output:
   xaringan::moon_reader:
     mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
@@ -203,7 +202,7 @@ Aside from predictions, we are often interested in understanding the way that $Y
 
 * Which predictors are .bold.blue[associated] with the response?
 
-* What is the .bold.blue[relationship] between the response and each predictor (or subset thereof)?
+* What is the nature of the .bold.blue[relationship] between the response and each predictor (or subset thereof)?
 
 <!-- * Can the relationship between $Y$ and each predictor be adequately summarized -->
 <!-- using a linear equation, or is the relationship more complicated? -->
@@ -1132,21 +1131,53 @@ spam_bag <- randomForest(
 
 .pull-right[
 
-```{r, echo=FALSE, out.width="400"}
+```{r, echo=FALSE, fig.width=4, fig.asp=1, out.width="100%", animation.hook="gifski", dev="png"}
+# Load required packages
+library(gganimate)
+
 # Compute test error
 pred <- predict(spam_bag, newdata = xtst, type = "class")
 spam_bag_acc <- accuracy(pred = pred, obs = tst$type)
 
 # Plot test error
 dark2 <- RColorBrewer::brewer.pal(8, "Dark2")
-par(mar = c(4, 4, 0.1, 0.1))
-plot(seq_len(spam_bag$ntree), spam_bag$test$err.rate[, "Test"], type = "l", 
-     col = dark2[1L], ylim = c(0.04, 0.11), las = 1,
-     ylab = "Test error", xlab = "Number of trees")
-abline(h = 1 - spam_tree_acc, lty = 2, col = "black")
-abline(h = 1 - spam_bag_acc, lty = 2, col = dark2[1L])
-legend("topright", c("Single tree", "Bagging"),
-       col = c("black", dark2[1L]), lty = c(2, 1), lwd = 1)
+# par(mar = c(4, 4, 0.1, 0.1))
+# plot(seq_len(spam_bag$ntree), spam_bag$test$err.rate[, "Test"], type = "l", 
+#      col = dark2[1L], ylim = c(0.04, 0.11), las = 1,
+#      ylab = "Test error", xlab = "Number of trees")
+# abline(h = 1 - spam_tree_acc, lty = 2, col = "black")
+# abline(h = 1 - spam_bag_acc, lty = 2, col = dark2[1L])
+# legend("topright", c("Single tree", "Bagging"),
+#        col = c("black", dark2[1L]), lty = c(2, 1), lwd = 1)
+# df <- data.frame(tree = seq_len(spam_bag$ntree), 
+#                  error = spam_bag$test$err.rate[, "Test"])
+
+# Tidy test error data
+df <- spam_bag$test$err.rate %>%
+  as.data.frame() %>%
+  tibble::rowid_to_column("num_trees") %>%
+  tidyr::gather(type, error, -num_trees) %>%
+  dplyr::mutate(
+    type = dplyr::case_when(
+      type == "nonspam" ~ "Non-spam",
+      type == "spam" ~ "Spam",
+      TRUE ~ "Overall",
+    )
+  )
+
+# Animate test error progression
+ggplot(df, aes(x = num_trees, y = error, color = type)) +
+  geom_path() +
+  scale_colour_brewer(palette = "Dark2") +
+  geom_hline(yintercept = 1 - spam_tree_acc, linetype = 2, color = "black") +
+  geom_hline(yintercept = 1 - spam_bag_acc, linetype = 2, color = dark2[2L]) +
+  theme_light() +
+  theme(legend.title = element_blank(),
+        legend.position = c(0.8, 0.8)) +
+  xlab("Number of trees") +
+  ylab("Test error") +
+  ylim(0.04, 0.11) +
+  transition_reveal(id = type, along = num_trees)
 ```
 
 ]

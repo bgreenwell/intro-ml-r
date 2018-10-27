@@ -88,29 +88,29 @@ Title slide
   border-top: 80px solid #FAFAFA;
   border-bottom: 80px solid #FAFAFA;
   background-image: url(figures/effo-logo.png);
-	background-position: top left 50px;
-	background-size: 50%;
+	background-position: bottom right 50px;
+	background-size: 40%;
 }
 
 .title-slide > h1  {
   color: #A913BB;
-  font-size: 50px;
+  font-size: 70px;
   text-shadow: none;
   font-weight: 400;
   text-align: left;
-  margin-left: 15px;
-  padding-top: 300px;
+  /*margin-left: 15px;*/
+  /*padding-top: 50px;*/
 }
 
 .title-slide > h2  {
-  color: #A913BB;
+  color: #393A3F;
   font-weight: 300;
-  font-size: 40px;
+  font-size: 50px;
   text-shadow: none;
   text-align: left;
   margin-left: 0;
-  margin-top: -25px;
-  padding-bottom: -20px;
+  /*margin-top: -25px;*/
+  /*padding-bottom: -20px;*/
 }
 
 .title-slide > h3  {
@@ -119,8 +119,8 @@ Title slide
   font-weight: 300;
   font-size: 25px;
   text-align: left;
-  margin-left: 50px;
-  margin-bottom: -30px;
+  /*margin-left: 50px;*/
+  /*margin-bottom: -30px;*/
 }
 
 
