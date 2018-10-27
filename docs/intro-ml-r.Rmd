@@ -641,7 +641,7 @@ knitr::include_graphics("figures/apm-summary.png")
 
 ---
 
-# A good modelling tool
+# A good modeling tool
 
 .pull-left.font110[
 
