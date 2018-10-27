@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Analytics Connect ’18</title>
+    <title>Analytics Connect ’18:</title>
     <meta charset="utf-8">
-    <meta name="author" content="Brandon M. Greenwell Data Scientist / <i class="fab  fa-r-project "></i> <i class="fas  fa-user-ninja "></i>" />
+    <meta name="author" content="Brandon M. Greenwell <span>&lt;i class="fab  fa-github faa-vertical animated "&gt;&lt;/i&gt;</span> Fork me on GitHub <span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;@bgreenwell8</span>" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/hygge.css" rel="stylesheet" />
     <link href="libs/remark-css/ninjutsu.css" rel="stylesheet" />
-    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="libs/font-awesome-animation/font-awesome-animation-emi.css" rel="stylesheet" />
+    <script src="libs/fontawesome/js/fontawesome-all.min.js"></script>
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Analytics Connect ’18
+# Analytics Connect ’18:
 ## Introduction to Machine Learning in R
-### Brandon M. Greenwell<br>Data Scientist / <i class="fab  fa-r-project "></i> <i class="fas  fa-user-ninja "></i>
-### 24 October, 2018
+### Brandon M. Greenwell<br><a href="https://github.com/bgreenwell/intro-ml-r"><span>&lt;i class="fab  fa-github faa-vertical animated "&gt;&lt;/i&gt;</span> Fork me on GitHub</a><br><a href="https://twitter.com/bgreenwell8"><span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;@bgreenwell8</span></a>
+### 27 October, 2018
 
 ---
 
@@ -33,6 +34,42 @@ background-size: 70%
 class: clear, center, middle
 
 .font300.bold[What is machine learning?]
+
+
+---
+
+# Popular terms
+
+.font150[
+
+* .purple[Machine learning]: construcintg algorithms that learn from data
+
+* .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
+
+* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data (isn't this applied statistics 🤔)
+
+]
+
+.full-width.content-box-purple.font150.center[Similar terms with slightly different emphases!]
+
+
+---
+
+# Some take home messages
+
+.full-width.content-box-purple.font150.center[This talk is about *supervised machine learning*: building models from data that predict an outcome **Y** using a collection of features **X**]
+
+--
+
+.font150[
+
+* Many flexible tools for making predictions from data
+
+* They are not magick! They require **good data** and proper validation
+
+* Model fitting (and validation) takes longer with "big data" ⏳
+
+]
 
 
 ---
@@ -101,6 +138,10 @@ Assume a stochastic data model:
 
 &lt;img src="figures/data-modeling-culture.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
+???
+
+Domain experts work for years to learn good features; they bring the statistician a "small" data set
+
 
 ---
 
@@ -113,6 +154,10 @@ Find a function `\(f\left(\boldsymbol{X}\right)\)` to predict `\(\boldsymbol{Y}\
 ]
 
 &lt;img src="figures/algorithmic-modeling-culture.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+???
+
+We start with a "large" data set with many features and use machine learning to find the "good" ones
 
 
 ---
@@ -327,6 +372,68 @@ ggplot(boston_train, aes(x = cmedv)) +
 ```
 
 &lt;img src="intro-ml-r_files/figure-html/sampling-distribution-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Data shape
+
+&lt;img src="figures/wide-data-tall-data.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Wide data
+
+.pull-left[
+
+&lt;img src="figures/wide-data.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right.font125[
+
+* Thousands / millions of features
+
+* Hundreds of records (i.e., rows)
+
+* Prone to over fitting 
+
+    - Need to regularize or otherwise reduce the number fetures
+
+]
+
+.full-width.content-box-yellow.font150.center[Screening with FDR, Elastic net, SVMs, and stepwise procedures]
+
+---
+
+# Tall data
+
+.pull-left[
+
+&lt;img src="figures/tall-data.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right.font125[
+
+* Tens / hundreds of features
+
+* Thousands / millions of records (i.e., rows)
+
+* Plenty of samples to fit richer models with interactions, etc.!
+
+]
+
+.full-width.content-box-yellow.font150.center[GzLMs, .bold.red[tree-based methods], GBMs, and network models (like DNNs)]
+
+
+---
+
+Data preprocessing
+
+
+
 
 
 ---
@@ -843,7 +950,7 @@ spam_bag &lt;- randomForest(
 
 .pull-right[
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-5-1.svg" width="400" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-6-1.svg" width="400" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -979,7 +1086,7 @@ spam_rf &lt;- randomForest(
 
 .pull-right[
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-7-1.svg" width="400" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-8-1.svg" width="400" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1059,7 +1166,7 @@ class: clear, middle, center
 # Predicting email spam
 
 .font150.bold.left[OOB vs. test error: e-mail spam example]
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-8-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1350,7 +1457,7 @@ class: clear, middle
 grid.arrange(p1, p2, p3, ncol = 3)
 ```
 
-&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-12-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="intro-ml-r_files/figure-html/unnamed-chunk-13-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
