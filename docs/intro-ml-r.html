@@ -63,11 +63,13 @@ class: clear, center, middle
 
 * .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
 
-* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data (isn't this applied statistics 🤔)
+* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data
+
+    - "Data Science is statistics on a Mac" <i class="fab  fa-apple "></i>
 
 ]
 
-.full-width.content-box-purple.font150.center[Similar terms with slightly different emphases!]
+.full-width.content-box-red.font150.center[Similar terms with slightly different emphases!]
 
 
 ---
@@ -75,8 +77,6 @@ class: clear, center, middle
 # Some take home messages
 
 .full-width.content-box-purple.font150.center[This talk is about *supervised machine learning*: building models from data that predict an outcome **Y** using a collection of features **X**]
-
---
 
 .font150[
 
@@ -87,7 +87,6 @@ class: clear, center, middle
 * Model fitting (and validation) takes longer with "big data" ⏳
 
 ]
-
 
 ---
 
@@ -188,8 +187,6 @@ Aside from predictions, we are often interested in understanding the way that `\
 
 ]
 
---
-
 .font125[
 
 .pull-left[
@@ -199,9 +196,6 @@ Aside from predictions, we are often interested in understanding the way that `\
 * Which predictors are .bold.blue[associated] with the response?
 
 * What is the nature of the .bold.blue[relationship] between the response and each predictor (or subset thereof)?
-
-&lt;!-- * Can the relationship between `\(Y\)` and each predictor be adequately summarized --&gt;
-&lt;!-- using a linear equation, or is the relationship more complicated? --&gt;
 
 ]
 
@@ -246,22 +240,8 @@ It is possible to "over tune" your models to maximize performance on the trainin
 
 
 ---
-class: clear, middle, center
-
-.font200[
-
-Generalization error `\(\approx\)` `\(\sigma^2\)` `\(+\)` .red.vold[Bias] `\(+\)` .red.vold[Variance] 
-
-]
-
-&lt;img src="intro-ml-r_files/figure-html/bias-variance-tradeoff-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
----
 
 # Two goals in model development
-
---
 
 .font150.pull-left[
 
@@ -274,8 +254,6 @@ to choose the .bold["best"] one
 
 ]
 
---
-
 .font150.pull-right[
 
 ## Model assessment
@@ -284,8 +262,6 @@ Having chosen a final model, estimating its prediction
 error (i.e., generalization error) on .bold[new data]
 
 ]
-
---
 
 .full-width.content-box-yellow.font175.center[If we have "enough" data, divide it up!]
 
@@ -296,11 +272,7 @@ error (i.e., generalization error) on .bold[new data]
 
 .full-width.content-box-yellow.font150.center[How do we divide up the data for each task?]
 
---
-
 .font125[
-
-&lt;!-- We *typically* split the data into two non-overlapping sets: --&gt;
 
 * The .bold[training set] is used to fit the models
 
@@ -333,6 +305,18 @@ It is difficult to give a general rule of 👍 on how to choose the number of ob
 &lt;br&gt;&lt;br&gt;
 
 &lt;img src="figures/data-splitting.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: clear, middle, center
+
+.font200[
+
+Generalization error `\(\approx\)` `\(\sigma^2\)` `\(+\)` .red.vold[Bias] `\(+\)` .red.vold[Variance] 
+
+]
+
+&lt;img src="intro-ml-r_files/figure-html/bias-variance-tradeoff-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -475,17 +459,15 @@ Once data are gathered, it must be cleaned and prepped for data analysis. Such t
 
 
 ---
+class: clear, middle, center
 
-# A handy flow chart
-
-&lt;img src="figures/flow-chart.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/flow-chart.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
+class: clear, middle, center
 
-# Another handy chart
-
-&lt;img src="figures/apm-summary.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/apm-summary.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -705,7 +687,7 @@ Optimal tree (test error = 0%):
 
 .right.font300.tomato["If it smells bad, don't eat it!"]
 &lt;br&gt;
-.right.font200[-Decision Stump]
+.right.font200[--- Decision Stump]
 
 
 ---
@@ -771,7 +753,8 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 
 
 ---
-class: clear, middle
+
+# Predicting email spam
 
 .pull-left[
 
@@ -815,7 +798,7 @@ class: clear, middle
 
 .pull-left[
 
-## Advantages:
+.font150.bold[Advantages:]
 
 * .MediumSeaGreen[Small trees are easy to interpret]
 
@@ -835,7 +818,7 @@ class: clear, middle
 
 .pull-right[
 
-## Disadvantages:
+.font150.bold[Disadvantages:]
 
 * .tomato[Large trees can be difficult to interpret]
 
@@ -2115,7 +2098,31 @@ class: clear, middle, center
 
 
 ---
-class: clear, middle, center
+class: clear, middle
+
+.pull-left.font100.left[
+
+&lt;img src="figures/leo-breiman.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+"Take the output of random forests not as absolute truth, but as smart computer generated guesses that may be helpful in leading to a deeper understanding of the problem."
+
+--- Leo Breiman
+
+]
+
+.pull-right.font100.left[
+
+&lt;img src="figures/george-box.jpg" width="54%" style="display: block; margin: auto;" /&gt;
+
+"All models are wrong, but some are useful."
+
+--- George E. Box
+
+]
+
+
+---
+class: middle
 
 # Questions?
 

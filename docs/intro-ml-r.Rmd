@@ -77,11 +77,13 @@ class: clear, center, middle
 
 * .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
 
-* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data (isn't this applied statistics `r emo::ji("thinking")`)
+* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data
+
+    - "Data Science is statistics on a Mac" `r icon::fa("apple")`
 
 ]
 
-.full-width.content-box-purple.font150.center[Similar terms with slightly different emphases!]
+.full-width.content-box-red.font150.center[Similar terms with slightly different emphases!]
 
 
 ---
@@ -89,8 +91,6 @@ class: clear, center, middle
 # Some take home messages
 
 .full-width.content-box-purple.font150.center[This talk is about *supervised machine learning*: building models from data that predict an outcome **Y** using a collection of features **X**]
-
---
 
 .font150[
 
@@ -101,7 +101,6 @@ class: clear, center, middle
 * Model fitting (and validation) takes longer with "big data" `r emo::ji("time")`
 
 ]
-
 
 ---
 
@@ -209,8 +208,6 @@ Aside from predictions, we are often interested in understanding the way that $Y
 
 ]
 
---
-
 .font125[
 
 .pull-left[
@@ -220,9 +217,6 @@ Aside from predictions, we are often interested in understanding the way that $Y
 * Which predictors are .bold.blue[associated] with the response?
 
 * What is the nature of the .bold.blue[relationship] between the response and each predictor (or subset thereof)?
-
-<!-- * Can the relationship between $Y$ and each predictor be adequately summarized -->
-<!-- using a linear equation, or is the relationship more complicated? -->
 
 ]
 
@@ -294,6 +288,76 @@ gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 
 
 ---
+
+# Two goals in model development
+
+.font150.pull-left[
+
+## Model selection
+
+Estimating the *performance* of different models in order
+to choose the .bold["best"] one
+
+* Choosing *hyperparmaters*
+
+]
+
+.font150.pull-right[
+
+## Model assessment
+
+Having chosen a final model, estimating its prediction
+error (i.e., generalization error) on .bold[new data]
+
+]
+
+.full-width.content-box-yellow.font175.center[If we have "enough" data, divide it up!]
+
+
+---
+
+# Data splitting
+
+.full-width.content-box-yellow.font150.center[How do we divide up the data for each task?]
+
+.font125[
+
+* The .bold[training set] is used to fit the models
+
+* The .bold[validation set] is used to estimate prediction error for model selection
+
+* The .bold[test set] is used for assessment of the generalization error of the final chosen model
+
+    - Ideally, the test set should be kept under `r emo::ji("lock")` and `r emo::ji("key")` until the end of the data analysis (**Why?** `r emo::ji("thinking")`)
+
+]
+
+
+---
+
+# Data splitting
+
+.font150[
+
+It is difficult to give a general rule of `r emo::ji("thumbs up")` on how to choose the number of observations in each of the three parts, as this depends on the *signal-to noise ratio* in the data and the training sample size
+
+]
+
+.full-width.content-box-yellow.font150.center[A typical split might be 50% for training, and 25% each for validation and testing]
+
+
+---
+
+# Data splitting
+
+<br><br>
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("figures/data-splitting.png")
+```
+
+
+---
 class: clear, middle, center
 
 .font200[
@@ -349,86 +413,6 @@ ggplot(res, aes(x = 1/k, y = 1/rmse, color = sample)) +
         axis.ticks.x = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank())
-```
-
-
----
-
-# Two goals in model development
-
---
-
-.font150.pull-left[
-
-## Model selection
-
-Estimating the *performance* of different models in order
-to choose the .bold["best"] one
-
-* Choosing *hyperparmaters*
-
-]
-
---
-
-.font150.pull-right[
-
-## Model assessment
-
-Having chosen a final model, estimating its prediction
-error (i.e., generalization error) on .bold[new data]
-
-]
-
---
-
-.full-width.content-box-yellow.font175.center[If we have "enough" data, divide it up!]
-
-
----
-
-# Data splitting
-
-.full-width.content-box-yellow.font150.center[How do we divide up the data for each task?]
-
---
-
-.font125[
-
-<!-- We *typically* split the data into two non-overlapping sets: -->
-
-* The .bold[training set] is used to fit the models
-
-* The .bold[validation set] is used to estimate prediction error for model selection
-
-* The .bold[test set] is used for assessment of the generalization error of the final chosen model
-
-    - Ideally, the test set should be kept under `r emo::ji("lock")` and `r emo::ji("key")` until the end of the data analysis (**Why?** `r emo::ji("thinking")`)
-
-]
-
-
----
-
-# Data splitting
-
-.font150[
-
-It is difficult to give a general rule of `r emo::ji("thumbs up")` on how to choose the number of observations in each of the three parts, as this depends on the *signal-to noise ratio* in the data and the training sample size
-
-]
-
-.full-width.content-box-yellow.font150.center[A typical split might be 50% for training, and 25% each for validation and testing]
-
-
----
-
-# Data splitting
-
-<br><br>
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figures/data-splitting.png")
 ```
 
 
@@ -589,19 +573,17 @@ grid.arrange(p1, p2, ncol = 1)
 
 
 ---
+class: clear, middle, center
 
-# A handy flow chart
-
-```{r sklearn-chart, echo=FALSE, out.width="90%"}
+```{r sklearn-chart, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/flow-chart.png")
 ```
 
 
 ---
+class: clear, middle, center
 
-# Another handy chart
-
-```{r apm-chart, echo=FALSE, out.width="90%"}
+```{r apm-chart, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/apm-summary.png")
 ```
 
@@ -848,7 +830,7 @@ prp(cart2,
 
 .right.font300.tomato["If it smells bad, don't eat it!"]
 <br>
-.right.font200[-Decision Stump]
+.right.font200[--- Decision Stump]
 
 
 ---
@@ -925,7 +907,8 @@ prp(spam_tree,
 
 
 ---
-class: clear, middle
+
+# Predicting email spam
 
 .pull-left[
 
@@ -940,7 +923,7 @@ vip::vi(spam_tree) %>%  #<<
 
 .pull-right[
 
-```{r spam-vip, fig.width=6, fog.asp=0.618, out.width="100%"}
+```{r spam-vip, fig.width=6, fig.asp=0.618, out.width="100%"}
 # Variable importance plot
 vip(spam_tree, num_features = 10)  #<<
 ```
@@ -954,7 +937,7 @@ vip(spam_tree, num_features = 10)  #<<
 
 .pull-left[
 
-## Advantages:
+.font150.bold[Advantages:]
 
 * .MediumSeaGreen[Small trees are easy to interpret]
 
@@ -974,7 +957,7 @@ vip(spam_tree, num_features = 10)  #<<
 
 .pull-right[
 
-## Disadvantages:
+.font150.bold[Disadvantages:]
 
 * .tomato[Large trees can be difficult to interpret]
 
@@ -2423,7 +2406,35 @@ ggplot(pds, aes(x = xval, y = yhat)) +
 
 
 ---
-class: clear, middle, center
+class: clear, middle
+
+.pull-left.font100.left[
+
+```{r leo-breiman, echo=FALSE, out.width="60%"}
+knitr::include_graphics("figures/leo-breiman.jpg")
+```
+
+"Take the output of random forests not as absolute truth, but as smart computer generated guesses that may be helpful in leading to a deeper understanding of the problem."
+
+--- Leo Breiman
+
+]
+
+.pull-right.font100.left[
+
+```{r george-box, echo=FALSE, out.width="54%"}
+knitr::include_graphics("figures/george-box.jpg")
+```
+
+"All models are wrong, but some are useful."
+
+--- George E. Box
+
+]
+
+
+---
+class: middle
 
 # Questions?
 
