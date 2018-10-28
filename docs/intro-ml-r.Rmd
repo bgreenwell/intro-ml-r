@@ -4,7 +4,6 @@ subtitle: "Analytics Connect '18"
 author: "Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa('github', animate='vertical')` Fork me on GitHub](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa('twitter', animate='float', rtext='@bgreenwell8')`](https://twitter.com/bgreenwell8)"
 output:
   xaringan::moon_reader:
-    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     css: [default, custom.css, hygge, "ninjutsu"]
     lib_dir: libs
     nature:
@@ -68,7 +67,17 @@ my_id <- "1551b314-5e8a-4477-aca2-088c05963111-v1"
 ---
 class: clear, center, middle
 
+.pull-left[
+
 .font300.bold[What is machine learning?]
+
+]
+
+.pull-right[
+
+![](figures/ml-tshirt.jpg)
+
+]
 
 
 ---
@@ -154,9 +163,13 @@ knitr::include_graphics("figures/fundamentals.jpg")
 
 ---
 
-# Black box nature
+# Nature as a black box
 
-<br><br><br>
+.font200[
+
+Nature acts on $\boldsymbol{X}$ to produce $\boldsymbol{Y}$:
+
+]
 
 ```{r black-box-nature, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/black-box-nature.svg")
@@ -203,7 +216,7 @@ We start with a "large" data set with many features and use machine learning to 
 
 ---
 
-# Algorithmic interpretation
+# Algorithmic interpretation `r anicon::cia("figures/vip-pdp-horizontal.png", animate = FALSE, size = 1)`
 
 .font150[
 
@@ -237,7 +250,7 @@ knitr::include_graphics("figures/vip-pdp-horizontal.png")
 
 ---
 
-# Algorithmic interpretation
+# Algorithmic interpretation `r anicon::cia("figures/vip-pdp-horizontal.png", animate = FALSE, size = 1)`
 
 <br>
 
@@ -248,7 +261,7 @@ knitr::include_graphics("figures/black-box-02.png")
 
 ---
 
-# Algorithmic interpretation
+# Algorithmic interpretation `r anicon::cia("figures/vip-pdp-horizontal.png", animate = "pulse", size = 1)`
 
 <br>
 
@@ -259,11 +272,11 @@ knitr::include_graphics("figures/black-box-03.png")
 
 ---
 
-# Overfitting
+# Over fitting
 
 .font150[
 
-It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process *overfitting*.
+It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process .red[*over fitting*]:
 
 ]
 
@@ -1706,7 +1719,7 @@ class: clear, middle
 .code115[
 
 ```{r 3d-plots, echo=TRUE}
-# 3-D plots :)  #<<
+# 3-D plots  #<<
 pd <- attr(p3, "partial.data")  # no need to recalculate #<<
 p1 <- plotPartial(pd, 
   levelplot = FALSE, drape = TRUE, colorkey = FALSE,
@@ -1715,13 +1728,13 @@ p1 <- plotPartial(pd,
 ```
 
 ```{r ggplot2-plots, echo=TRUE}
-# Using ggplot2 :)  #<<
+# Using ggplot2  #<<
 library(ggplot2)
 p2 <- autoplot(pd, palette = "magma")
 ```
 
 ```{r ice-curves, echo=TRUE}
-# ICE and c-ICE curves :)  #<<
+# ICE and c-ICE curves  #<<
 p3 <- boston_ranger %>%  # %>% is automatically imported!
   partial(pred.var = "rm", ice = TRUE, center = TRUE) %>%
   autoplot(alpha = 0.1)
@@ -2172,7 +2185,7 @@ grid.arrange(autoplot(pd1), autoplot(pd2), ncol = 2)
 
 # Ames housing data
 
-.pull-left[
+.pull-left.font120[
 
 * A contemporary alternative to the often cited Boston housing data
 
@@ -2186,16 +2199,14 @@ grid.arrange(autoplot(pd1), autoplot(pd2), ncol = 2)
 
 .pull-right[
 
-```{r ames-densities, out.width="70%"}
-ames <- AmesHousing::make_ames()
-ggplot(ames, aes(x = Sale_Price, y = Overall_Qual)) + 
+```{r ames-densities, fig.width=6, fig.asp=0.618, out.width="100%"}
+ggplot(AmesHousing::make_ames(), aes(x = Sale_Price, y = Overall_Qual)) + 
   ggridges::geom_density_ridges(aes(fill = Overall_Qual)) +  #<<
   scale_x_continuous(labels = scales::dollar) +
   labs(x = "Sale price", y = "Overall quality") +
   theme_light() + theme(legend.position = "none")
 ```
-
-**Source:** [Bradley Boehmke](https://github.com/bradleyboehmke)
+.font80[**Source:** [Bradley Boehmke](https://github.com/bradleyboehmke)]
 
 ]
 
