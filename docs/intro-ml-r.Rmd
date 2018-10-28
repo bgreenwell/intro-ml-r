@@ -22,7 +22,7 @@ options(htmltools.dir.version = FALSE, servr.daemon = TRUE,
 
 # Set global knitr chunk options
 knitr::opts_chunk$set(
-  dev = "png",
+  dev = "svg",
   fig.align = "center",
   cache = TRUE,
   error = FALSE,
@@ -33,8 +33,12 @@ knitr::opts_chunk$set(
 
 # Load required packages
 library(ggplot2)
+library(gganimate)
 library(pdp)
 library(vip)
+
+# Colors
+dark2 <- RColorBrewer::brewer.pal(8, name = "Dark2")
 
 # RBitmoji id
 my_id <- "1551b314-5e8a-4477-aca2-088c05963111-v1"
@@ -1161,9 +1165,6 @@ spam_bag <- randomForest(
 .pull-right[
 
 ```{r, echo=FALSE, fig.width=4, fig.asp=1, out.width="100%"}
-# Load required packages
-library(gganimate)
-
 # Compute test error
 pred <- predict(spam_bag, newdata = xtst, type = "class")
 spam_bag_acc <- accuracy(pred = pred, obs = tst$type)
