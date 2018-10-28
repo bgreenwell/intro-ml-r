@@ -1,7 +1,6 @@
 ---
 title: "Introduction to Machine Learning in R"
 author: "Brandon M. Greenwell"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
@@ -9,4 +8,4 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-[Slides](https://github.8451.com/pages/b780620/intro-ml-r/intro-ml-r#1)
+[Launch slides](https://bgreenwell.github.io/intro-ml-r/intro-ml-r.html#1)
