@@ -927,20 +927,20 @@ prp(spam_tree,
 ---
 class: clear, middle
 
-# Predicting email spam
-
 .pull-left[
 
 ```{r spam-vi}
 # Variable importance scores
-vip::vi(spam_tree)  #<<
-```
+vip::vi(spam_tree) %>%  #<<
+  as.data.frame() %>% 
+  head(10)
+``` 
 
 ]
 
 .pull-right[
 
-```{r spam-vip, out.width="100%"}
+```{r spam-vip, fig.width=6, fog.asp=0.618, out.width="100%"}
 # Variable importance plot
 vip(spam_tree, num_features = 10)  #<<
 ```
