@@ -4,6 +4,7 @@ subtitle: "Analytics Connect '18"
 author: "Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa('github', animate='vertical')` Fork me on GitHub](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa('twitter', animate='float', rtext='@bgreenwell8')`](https://twitter.com/bgreenwell8)"
 output:
   xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     css: [default, custom.css, hygge, "ninjutsu"]
     lib_dir: libs
     nature:
@@ -109,7 +110,7 @@ class: clear, center, middle
 
 * Many flexible tools for making predictions from data
 
-* They are not magic! They require **good data** and proper validation
+* They are not magic! They require `r anicon::nia("**good data**", animate = "pulse")` and proper validation
 
 * Model fitting (and validation) takes longer with "big data" `r emo::ji("time")`
 
@@ -159,6 +160,92 @@ class: clear, inverse, center, middle
 ```{r fundamentals, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/fundamentals.jpg")
 ```
+
+
+---
+
+# Classification vs. regression
+
+```{r classification-vs-regression, echo=FALSE, fig.width=7, fig.asp=0.5, out.width="100%"}
+# Set up plotting grid
+par(mfrow = c(1, 2))
+
+# Boston housing data
+plot(
+  formula = cmedv ~ lstat, 
+  data = pdp::boston, 
+  # asp = 1,
+  cex = 1.2,
+  pch = 19,
+  col = adjustcolor(dark2[1], alpha.f = 0.1),
+  main = "Regression",
+  xlab = "Lower status of the population (%)",
+  ylab = "Median home value"
+)
+mars <- earth::earth(cmedv ~ lstat, data = pdp::boston)
+x <- seq(from = 1.73, max = 37.97, length = 100)
+y <- predict(mars, newdata = data.frame(lstat = x))
+lines(x, y)
+
+# Simulate data
+set.seed(805)
+norm2d <- as.data.frame(mlbench::mlbench.2dnormals(
+  n = 100,
+  cl = 2,
+  r = 4,
+  sd = 1
+))
+names(norm2d) <- c("x1", "x2", "y")  # rename columns
+# Scatterplot
+plot(
+  formula = x2 ~ x1, 
+  data = norm2d, 
+  asp = 1,
+  cex = 1.2,
+  pch = c(17, 19)[norm2d$y],
+  col = adjustcolor(dark2[norm2d$y], alpha.f = 0.5),
+  main = "Classification",
+  xlab = "Income (standardized)",
+  ylab = "Lot size (standardized)"
+)
+abline(a = 0, b = -1)
+legend("topleft", pch = c(17, 19), col = dark2[1:2], cex = 0.5, bty = "n",
+       inset = 0.01, title = "Owns a riding mower", legend = c("Yes", "No"))
+```
+
+
+
+---
+
+# Data sets
+
+.font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)]
+
+.font150[
+
+.pull-left[
+
+## Classification:
+
+* Mushroom edibility `r emo::ji("mushroom")`
+
+* E-mail spam `r emo::ji("email")`
+
+* Swiss banknote `r set.seed(8); emo::ji("currency")`
+
+]
+
+.pull-right[
+
+## Regression:
+
+* Boston housing data `r emo::ji("house")`
+
+* Ames housing data `r emo::ji("house")`
+
+]
+
+]
 
 
 ---
@@ -603,39 +690,6 @@ class: clear, middle, center
 ```{r apm-chart, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/apm-summary.png")
 ```
-
-
----
-
-# Data sets
-
-.font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)]
-
-.font150[
-
-.pull-left[
-
-## Classification:
-
-* Mushroom edibility `r emo::ji("mushroom")`
-
-* E-mail spam `r emo::ji("email")`
-
-* Swiss banknote `r set.seed(8); emo::ji("currency")`
-
-]
-
-.pull-right[
-
-## Regression:
-
-* Boston housing data `r emo::ji("house")`
-
-* Ames housing data `r emo::ji("house")`
-
-]
-
-]
 
 
 ---

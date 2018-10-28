@@ -92,7 +92,7 @@ class: clear, center, middle
 
 * Many flexible tools for making predictions from data
 
-* They are not magic! They require **good data** and proper validation
+* They are not magic! They require <span class=" faa-pulse animated " style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">**good data**</span> and proper validation
 
 * Model fitting (and validation) takes longer with "big data" ⏳
 
@@ -141,6 +141,47 @@ for (pkg in pkgs) {
 class: clear, inverse, center, middle
 
 &lt;img src="figures/fundamentals.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Classification vs. regression
+
+&lt;img src="intro-ml-r_files/figure-html/classification-vs-regression-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+# Data sets
+
+.font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)]
+
+.font150[
+
+.pull-left[
+
+## Classification:
+
+* Mushroom edibility 🍄
+
+* E-mail spam ✉️
+
+* Swiss banknote 💷
+
+]
+
+.pull-right[
+
+## Regression:
+
+* Boston housing data 🏠
+
+* Ames housing data 🏠
+
+]
+
+]
 
 
 ---
@@ -482,39 +523,6 @@ class: clear, middle, center
 class: clear, middle, center
 
 &lt;img src="figures/apm-summary.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-# Data sets
-
-.font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)]
-
-.font150[
-
-.pull-left[
-
-## Classification:
-
-* Mushroom edibility 🍄
-
-* E-mail spam ✉️
-
-* Swiss banknote 💷
-
-]
-
-.pull-right[
-
-## Regression:
-
-* Boston housing data 🏠
-
-* Ames housing data 🏠
-
-]
-
-]
 
 
 ---
@@ -2180,7 +2188,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
