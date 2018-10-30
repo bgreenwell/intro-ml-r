@@ -1,9 +1,7 @@
 ---
-title: "Introduction to Machine learning in `r icon::fa('r-project')` `r anicon::cia('https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453', animate=FALSE, size=1, border=F)`"
-subtitle: "Analytics Connect '18"
-author: "Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa('github', animate='vertical')` Fork me on GitHub](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa('twitter', animate='float', rtext='@bgreenwell8')`](https://twitter.com/bgreenwell8)"
 output:
   xaringan::moon_reader:
+    seal: false
     mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     css: [default, custom.css, hygge, "ninjutsu"]
     lib_dir: libs
@@ -12,6 +10,36 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: true
+---
+class: clear
+
+.font300[
+
+Introduction to Machine learning in `r icon::fa("r-project")` `r anicon::cia("https://emojis.slackmojis.com/emojis/images/1450319453/122/carlton.gif?1450319453", animate = FALSE, size = 1, border = FALSE)`
+
+]
+
+.font250[
+
+Analytics Connect '18
+
+]
+
+.pull-left.font120[
+
+Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa("github", animate = "vertical", rtext = "Fork me on GitHub")`](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa("twitter", animate = "float", rtext = "@bgreenwell8")`](https://twitter.com/bgreenwell8)
+
+]
+
+.pull-right[
+
+```{r effo, echo=FALSE, out.width="100%"}
+knitr::include_graphics("figures/effo-logo.png")
+```
+
+
+]
+
 ---
 class: clear, split-two
 
