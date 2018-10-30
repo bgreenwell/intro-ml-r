@@ -788,13 +788,13 @@ class: clear, middle
 library(caret)  # for data splitting function
 library(rpart)  # for binary recursive partitioning
 
-# Partition the data into train/test sets
+# Partition the data into train/test sets  #<<
 set.seed(101)
 trn_id <- createDataPartition(
   y = mushroom$Edibility, p = 0.5, list = FALSE
 )
-trn <- mushroom[trn_id, ]   # training data
-tst <- mushroom[-trn_id, ]  # test data
+trn <- mushroom[trn_id, ]   # training data  #<<
+tst <- mushroom[-trn_id, ]  # test data  #<<
 
 # Function to calculate accuracy
 accuracy <- function(pred, obs) {
@@ -837,7 +837,7 @@ accuracy(
 .pull-right[
 
 ```{r mushroom-tree-2}
-# Optimal tree (test error = 0%):
+# Complex tree (test error = 0%):
 cart2 <- rpart(
   Edibility ~ ., data = trn, 
   control = list(cp = 0, minbucket = 1, minsplit = 1) #<<
@@ -892,7 +892,7 @@ prp(cart1,
 
 .pull-right[
 
-.font125[Optimal tree (test error = 0%):]
+.font125[Complex tree (test error = 0%):]
 ```{r mushroom-tree-diagram-2, echo=FALSE, out.width="100%"}
 # Tree diagram (shallow tree)
 prp(cart2,
@@ -939,7 +939,7 @@ prp(cart2,
 .pull-right[
 
 ```{r fig-spam-300, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figures/this-is-spam.jpg")
+knitr::include_graphics("figures/spam.jpg")
 ```
 
 ]
