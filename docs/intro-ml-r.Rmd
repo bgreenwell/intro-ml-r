@@ -27,7 +27,7 @@ Analytics Connect '18
 
 .pull-left.font120[
 
-Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa("github", animate = "vertical", rtext = "Fork me on GitHub")`](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa("twitter", animate = "float", rtext = "@bgreenwell8")`](https://twitter.com/bgreenwell8)
+Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa("github", animate = "vertical", rtext = " Fork me on GitHub")`](https://github.com/bgreenwell/intro-ml-r)<br>[`r anicon::faa("twitter", animate = "float", rtext = " @bgreenwell8")`](https://twitter.com/bgreenwell8)
 
 ]
 
