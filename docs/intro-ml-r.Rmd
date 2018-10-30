@@ -136,7 +136,7 @@ class: clear, center, middle
 
 .font150[
 
-* Many flexible tools for making predictions from data
+* Many flexible `r emo::ji("hammer and wrench")` for making predictions from data
 
 * They are not magic! They require `r anicon::nia("**good data**", animate = "pulse")` and proper validation!
 
@@ -760,7 +760,7 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 # Mushroom classification
 
-There is no simple rule for determining the edibility of a [mushroom](https://raw.githubusercontent.com/bgreenwell/MLDay18/master/data/mushroom.csv); no rules like **"leaflets three, let it be"**, **"hairy vine, no friend of mine"** and **"berries white, run in fright"** for poison ivy.
+There is no simple rule for determining the edibility of a [mushroom](https://raw.githubusercontent.com/bgreenwell/MLDay18/master/docs/data/mushroom.csv); no rules like **"leaflets three, let it be"**, **"hairy vine, no friend of mine"** and **"berries white, run in fright"** for poison ivy.
 
 ```{r, echo=FALSE, out.width="50%"}
 knitr::include_graphics("figures/edible.jpg")
