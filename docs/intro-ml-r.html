@@ -512,11 +512,23 @@ class: clear, middle, center
 
 &lt;img src="figures/flow-chart.png" width="100%" style="display: block; margin: auto;" /&gt;
 
+.font150[
+
+**Source:** [Scikit-learn](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+]
+
 
 ---
 class: clear, middle, center
 
 &lt;img src="figures/apm-summary.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.font150[
+
+**Source:** [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
+
+]
 
 
 ---
@@ -682,14 +694,14 @@ accuracy(
 
 .pull-left[
 
-Decision stump (test error = 1.53%):
+.font125[Decision stump (test error = 1.53%):]
 &lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-1-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
 
-Optimal tree (test error = 0%):
+.font125[Optimal tree (test error = 0%):]
 &lt;img src="intro-ml-r_files/figure-html/mushroom-tree-diagram-2-1.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
@@ -697,7 +709,7 @@ Optimal tree (test error = 0%):
 
 ---
 
-# A handy new rule for mushrooms
+# A handy rule of 👍 for mushrooms
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
@@ -778,7 +790,7 @@ pred &lt;- predict(spam_tree, newdata = xtst, type = "class")
 ```r
 # Variable importance scores
 *vip::vi(spam_tree) %&gt;%
-  as.data.frame() %&gt;% 
+  as.data.frame() %&gt;%
   head(10)
 ##           Variable Importance
 ## 1  charExclamation  507.78427

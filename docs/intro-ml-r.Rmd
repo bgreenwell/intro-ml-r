@@ -686,6 +686,12 @@ class: clear, middle, center
 knitr::include_graphics("figures/flow-chart.png")
 ```
 
+.font150[
+
+**Source:** [Scikit-learn](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+]
+
 
 ---
 class: clear, middle, center
@@ -693,6 +699,12 @@ class: clear, middle, center
 ```{r apm-chart, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/apm-summary.png")
 ```
+
+.font150[
+
+**Source:** [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
+
+]
 
 
 ---
@@ -858,7 +870,7 @@ confusionMatrix(pred2, tst$Edibility)
 
 .pull-left[
 
-Decision stump (test error = 1.53%):
+.font125[Decision stump (test error = 1.53%):]
 ```{r mushroom-tree-diagram-1, echo=FALSE, out.width="100%"}
 # Load required packages
 library(rpart.plot)
@@ -879,7 +891,7 @@ prp(cart1,
 
 .pull-right[
 
-Optimal tree (test error = 0%):
+.font125[Optimal tree (test error = 0%):]
 ```{r mushroom-tree-diagram-2, echo=FALSE, out.width="100%"}
 # Tree diagram (shallow tree)
 prp(cart2,
@@ -898,7 +910,7 @@ prp(cart2,
 
 ---
 
-# A handy new rule for mushrooms
+# A handy rule of `r emo::ji("thumbs up")` for mushrooms
 
 <br><br><br><br>
 
@@ -989,7 +1001,7 @@ prp(spam_tree,
 ```{r spam-vi}
 # Variable importance scores
 vip::vi(spam_tree) %>%  #<<
-  as.data.frame() %>% 
+  as.data.frame() %>%
   head(10)
 ``` 
 
