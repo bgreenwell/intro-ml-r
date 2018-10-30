@@ -119,7 +119,7 @@ class: clear, center, middle
 
 * .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
 
-* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data
+* .purple[Data science]: applying mathematics, .bold[statistics], machine learning, engineering, etc. to extract knowledge form data
 
     - "Data Science is statistics on a Mac" `r icon::fa("apple")`
 
@@ -132,24 +132,27 @@ class: clear, center, middle
 
 # Some take home messages
 
-.full-width.content-box-purple.font150.center[This talk is about *supervised machine learning*: building models from data that predict an outcome **Y** using a collection of features **X**]
+.full-width.content-box-purple.font150.center[This talk is about *supervised learning*: building models from data that predict an **outcome** using a collection of **features**]
 
 .font150[
 
 * Many flexible tools for making predictions from data
 
-* They are not magic! They require `r anicon::nia("**good data**", animate = "pulse")` and proper validation
+* They are not magic! They require `r anicon::nia("**good data**", animate = "pulse")` and proper validation!
 
 * Model fitting (and validation) takes longer with "big data" `r emo::ji("time")`
 
+* No one method is uniformly best!
+
 ]
+
 
 ---
 class: clear, middle, center
 
 .font300[
 
-[`r icon::fa("r-project")` code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/intro-ml-r.R)
+Follow along: [`r icon::fa("r-project")` code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/intro-ml-r.R)
 
 ]
 
@@ -217,11 +220,11 @@ legend("topleft", pch = c(17, 19), col = dark2[1:2], cex = 0.5, bty = "n",
 
 ---
 
-# Data sets
+# Example data sets
 
-.font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)]
+<!-- .font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)] -->
 
-.font150[
+.font175[
 
 .pull-left[
 
@@ -363,7 +366,7 @@ knitr::include_graphics("figures/black-box-03.png")
 
 .font150[
 
-It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process .red[*over fitting*]:
+It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process [*over fitting*](https://en.wikipedia.org/wiki/Overfitting):
 
 ]
 
@@ -393,7 +396,7 @@ gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 
 ---
 
-# Two goals in model development
+# Model development
 
 .font150.pull-left[
 
@@ -424,7 +427,7 @@ error (i.e., generalization error) on .bold[new data]
 
 .full-width.content-box-yellow.font150.center[How do we divide up the data for each task?]
 
-.font125[
+.font135[
 
 * The .bold[training set] is used to fit the models
 
@@ -452,12 +455,23 @@ It is difficult to give a general rule of `r emo::ji("thumbs up")` on how to cho
 
 ---
 
-# Data splitting
+# Data splitting strategies
+
+<br>
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("figures/data-splitting.png")
+```
+
+
+---
+
+# 5-fold cross-validation
 
 <br><br>
 
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figures/data-splitting.png")
+knitr::include_graphics("figures/cross-validation.png")
 ```
 
 
@@ -522,17 +536,6 @@ ggplot(res, aes(x = 1/k, y = 1/rmse, color = sample)) +
 
 ---
 
-# 5-fold cross-validation
-
-<br><br>
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figures/cross-validation.png")
-```
-
-
----
-
 # Data splitting in R
 
 .code125[
@@ -580,9 +583,9 @@ knitr::include_graphics("figures/wide-data-tall-data.png")
 
 ---
 
-# Wide data
+# Wide data (lots of features)
 
-.pull-left[
+.pull-left.center[
 
 ```{r wide-data, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/wide-data.png")
@@ -606,9 +609,9 @@ knitr::include_graphics("figures/wide-data.png")
 
 ---
 
-# Tall data
+# Tall data (lots of observations)
 
-.pull-left[
+.pull-left.center[
 
 ```{r tall-data, echo=FALSE, out.width="30%"}
 knitr::include_graphics("figures/tall-data.png")
@@ -626,7 +629,7 @@ knitr::include_graphics("figures/tall-data.png")
 
 ]
 
-.full-width.content-box-yellow.font150.center[GzLMs, .bold.red[tree-based methods], GBMs, and network models (like DNNs)]
+.full-width.content-box-yellow.font150.center[GzLMs, .bold.red[tree-based methods] (like GBMs), and network models (like DNNs)]
 
 
 ---

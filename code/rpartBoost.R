@@ -49,23 +49,23 @@ for (i in c(0, 5, 10, 15, 25, 50, 100, 500, 1000)) {
   plotIter(bst, iter = i, main = paste("Iter:", i))
 }
 
-# Make a gif (requires that ImageMagick beinstalled on machine)
-for (i in c(0:98)){
-  suffix <- if (i %in% 0:8) {
-    paste0("0", i + 1)
-  } else {
-    i + 1
-  }
-  png(file = paste0("docs/gifs/boosted-stumps-", suffix, ".png"), 
-      width = 500, height = 500)
-  plotIter(bst, iter = i, show_legend = TRUE)
-  dev.off()
-}
-file_names <- sort(list.files("docs/gifs"))
-system(paste0(
-  "convert -delay 30 ", 
-  paste0(paste0("docs/gifs/", file_names), collapse = " "), 
-  " docs/gifs/boosted_stumps.gif"
-))
-# system("convert -delay 30 docs/gifs/*.png docs/gifs/boosted_stumps.gif")
-file.remove(list.files(path = "docs/gifs", pattern = ".png", full.names = TRUE))
+# Make a gif (requires that ImageMagick be installed on machine)
+# for (i in c(0:98)){
+#   suffix <- if (i %in% 0:8) {
+#     paste0("0", i + 1)
+#   } else {
+#     i + 1
+#   }
+#   png(file = paste0("docs/gifs/boosted-stumps-", suffix, ".png"), 
+#       width = 500, height = 500)
+#   plotIter(bst, iter = i, show_legend = TRUE)
+#   dev.off()
+# }
+# file_names <- sort(list.files("docs/gifs"))
+# system(paste0(
+#   "convert -delay 30 ", 
+#   paste0(paste0("docs/gifs/", file_names), collapse = " "), 
+#   " docs/gifs/boosted_stumps.gif"
+# ))
+# # system("convert -delay 30 docs/gifs/*.png docs/gifs/boosted_stumps.gif")
+# file.remove(list.files(path = "docs/gifs", pattern = ".png", full.names = TRUE))

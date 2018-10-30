@@ -93,7 +93,7 @@ class: clear, center, middle
 
 * .purple[Statistical learning]: emphasizes statistical models and the assessment of uncertainty
 
-* .purple[Data science]: applying mathematics, statistics, machine learning, engineering, etc. to extract knowledge form data
+* .purple[Data science]: applying mathematics, .bold[statistics], machine learning, engineering, etc. to extract knowledge form data
 
     - "Data Science is statistics on a Mac" <i class="fab  fa-apple "></i>
 
@@ -106,24 +106,27 @@ class: clear, center, middle
 
 # Some take home messages
 
-.full-width.content-box-purple.font150.center[This talk is about *supervised machine learning*: building models from data that predict an outcome **Y** using a collection of features **X**]
+.full-width.content-box-purple.font150.center[This talk is about *supervised learning*: building models from data that predict an **outcome** using a collection of **features**]
 
 .font150[
 
 * Many flexible tools for making predictions from data
 
-* They are not magic! They require <span class=" faa-pulse animated " style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">**good data**</span> and proper validation
+* They are not magic! They require <span class=" faa-pulse animated " style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">**good data**</span> and proper validation!
 
 * Model fitting (and validation) takes longer with "big data" ⏳
 
+* No one method is uniformly best!
+
 ]
+
 
 ---
 class: clear, middle, center
 
 .font300[
 
-[<i class="fab  fa-r-project "></i> code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/intro-ml-r.R)
+Follow along: [<i class="fab  fa-r-project "></i> code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/intro-ml-r.R)
 
 ]
 
@@ -144,11 +147,11 @@ class: clear, inverse, center, middle
 
 ---
 
-# Data sets
+# Example data sets
 
-.font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)]
+&lt;!-- .font250.center[[Data set information](https://bgreenwell.github.io/intro-ml-r/datasets)] --&gt;
 
-.font150[
+.font175[
 
 .pull-left[
 
@@ -278,7 +281,7 @@ Aside from predictions, we are often interested in understanding the way that `\
 
 .font150[
 
-It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process .red[*over fitting*]:
+It is possible to "over tune" your models to maximize performance on the training data. Such models will not generalize well to new data. We call this process [*over fitting*](https://en.wikipedia.org/wiki/Overfitting):
 
 ]
 
@@ -287,7 +290,7 @@ It is possible to "over tune" your models to maximize performance on the trainin
 
 ---
 
-# Two goals in model development
+# Model development
 
 .font150.pull-left[
 
@@ -318,7 +321,7 @@ error (i.e., generalization error) on .bold[new data]
 
 .full-width.content-box-yellow.font150.center[How do we divide up the data for each task?]
 
-.font125[
+.font135[
 
 * The .bold[training set] is used to fit the models
 
@@ -346,11 +349,20 @@ It is difficult to give a general rule of 👍 on how to choose the number of ob
 
 ---
 
-# Data splitting
+# Data splitting strategies
+
+&lt;br&gt;
+
+&lt;img src="figures/data-splitting.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# 5-fold cross-validation
 
 &lt;br&gt;&lt;br&gt;
 
-&lt;img src="figures/data-splitting.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/cross-validation.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -363,15 +375,6 @@ Generalization error `\(\approx\)` `\(\sigma^2\)` `\(+\)` .red.vold[Bias] `\(+\)
 ]
 
 &lt;img src="intro-ml-r_files/figure-html/bias-variance-tradeoff-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-# 5-fold cross-validation
-
-&lt;br&gt;&lt;br&gt;
-
-&lt;img src="figures/cross-validation.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -426,9 +429,9 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 ---
 
-# Wide data
+# Wide data (lots of features)
 
-.pull-left[
+.pull-left.center[
 
 &lt;img src="figures/wide-data.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -450,9 +453,9 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 ---
 
-# Tall data
+# Tall data (lots of observations)
 
-.pull-left[
+.pull-left.center[
 
 &lt;img src="figures/tall-data.png" width="30%" style="display: block; margin: auto;" /&gt;
 
@@ -468,7 +471,7 @@ ggplot(boston_train, aes(x = cmedv)) +
 
 ]
 
-.full-width.content-box-yellow.font150.center[GzLMs, .bold.red[tree-based methods], GBMs, and network models (like DNNs)]
+.full-width.content-box-yellow.font150.center[GzLMs, .bold.red[tree-based methods] (like GBMs), and network models (like DNNs)]
 
 
 ---
