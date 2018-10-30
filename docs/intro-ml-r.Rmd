@@ -68,7 +68,7 @@ library(vip)
 # Colors
 dark2 <- RColorBrewer::brewer.pal(8, name = "Dark2")
 
-# RBitmoji id
+# Brandon's RBitmoji id
 my_id <- "1551b314-5e8a-4477-aca2-088c05963111-v1"
 ```
 
@@ -145,41 +145,9 @@ class: clear, center, middle
 ]
 
 ---
+class: clear, middle, center
 
-# R packages 
-
-.scrollable[
-
-```{r pkgs, eval=FALSE}
-# List of required (CRAN) packages
-pkgs <- c(
-  "AmesHousing",   # for Ames housing data
-  "caret",         # for data splitting function
-  "gbm",           # for generalized boosted models**
-  "ggplot2",       # for nicer graphics
-  "kernlab",       # for email spam data
-  "pdp",           # for partial dependence plots**
-  "ranger",        # for faster random forest
-  "randomForest",  # for classic random forest
-  "RColorBrewer",  # for nicer looking color palettes 
-  "rpart",         # for binary recursive partioning (i.e., CART)
-  "tibble",        # for nicer data frames
-  "xaringan",      # for building this presentation
-  "xgboost"        # for eXtreme Gradient Boosting,
-  "vip"            # for variable importance plots**
-)
-
-# ** Developed, authored, and/or maintained by 84.51 employees
-
-# Install required (CRAN) packages
-for (pkg in pkgs) {
-  if (!(pkg %in% installed.packages()[, "Package"])) {
-    install.packages(pkg)
-  }
-}
-```
-
-]
+[`r icon::fa("r-project")` code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/intro-ml-r.R)
 
 
 ---
