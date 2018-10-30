@@ -147,7 +147,11 @@ class: clear, center, middle
 ---
 class: clear, middle, center
 
+.font300[
+
 [`r icon::fa("r-project")` code](https://github.com/bgreenwell/intro-ml-r/blob/master/code/intro-ml-r.R)
+
+]
 
 
 ---

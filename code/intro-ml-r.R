@@ -20,8 +20,8 @@ pkgs <- c(
   "rsample",       # for data splitting functions
   "tibble",        # for nicer data frames
   "xaringan",      # for building this presentation
-  "xgboost",       # for eXtreme Gradient Boosting,
-  "vip"            # for variable importance plots**
+  "xgboost"        # for eXtreme Gradient Boosting,
+  # "vip"            # for variable importance plots**
 )
 
 # ** Developed, authored, and/or maintained by 84.51 employees
@@ -34,6 +34,7 @@ for (pkg in pkgs) {
 }
 
 # Install required GitHub packages
+devtools::install_github("koalaverse/vip")  # use dev version for now
 devtools::install_github("thomasp85/gganimate")
 devtools::install_github("thomasp85/transformr")
 
