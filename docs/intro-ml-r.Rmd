@@ -414,7 +414,7 @@ knitr::include_graphics("figures/black-box-03.png")
 class: clear, middle, center
 
 ```{r chuck-norris, echo=FALSE}
-roundhouse::kick("When people tell you machine learning is just a black box",
+roundhouse::kick("When people tell you machine learning models are just black boxes",
                  type = 2, width = 40, size = 25, fps = 5)
 ```
 
