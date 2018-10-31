@@ -1129,11 +1129,18 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
 
 ---
 
-# Background
+# The bootstrap
+
+```{r bootstrap-sample, echo=FALSE, out.width="100%"}
+knitr::include_graphics("figures/bootstrap-sample.png")
+```
+
+
+---
+
+# **B**ootstrap **AGG**regat**ING**
 
 .pull-left[
-
-* **B**ootstrap **agg**regat**ing**
 
 * Bagging trees:
 
@@ -1141,18 +1148,19 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Forest#/med
     
     2. Fit an **overgrown tree** to the resampled data set
     
-    3. Repeat a large number of times ( $\ge 500$ , say)
+    3. Repeat a large number of times
 
 ]
  
 
 .pull-right[
 
-```{r fig-bagged-trees, echo=FALSE, out.width="80%"}
+```{r fig-bagged-trees, echo=FALSE, out.width="70%"}
 knitr::include_graphics("figures/millionaire.png")
 ```
 
 ]
+
 * Predictions are combined by popular vote (**classification**) or averaging (**regression**)
 
 * Same idea as ["wisdom of the crowd"](https://en.wikipedia.org/wiki/Wisdom_of_the_crowd) (<span style="color:purple">Francis Galton's Ox weight survey</span>)
