@@ -1,6 +1,17 @@
 ---
-output: html_document
+output: github_document
 ---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(
+  cache = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  # fig.align = "center",
+  fig.path = "docs/figures/README-"
+)
+```
+
 
 # Introduction to Machine Learning in R
 
