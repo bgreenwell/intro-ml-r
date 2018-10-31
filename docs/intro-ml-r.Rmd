@@ -1164,15 +1164,15 @@ knitr::include_graphics("figures/millionaire.png")
 
 # Bagging trees
 
-```{r bagging-1, echo=FALSE, out.width="60%"}
+```{r bagging-1, echo=FALSE, fig.width=6, fig.asp=0.618, out.width="100%"}
 # Simulate some sine wave data
 set.seed(1112)  # for reproducibility
-x <- seq(from = 0, to = 2 * pi, length = 100)
+x <- seq(from = 0, to = 2 * pi, length = 500)
 y <- sin(x) + rnorm(length(x), sd = 0.5)
-plot(x, y)
+plot(x, y, col = adjustcolor("black", alpha.f = 0.5))
 lines(x, sin(x))
-legend("topright", legend = "True function", lty = 1, inset = 0.01,
-       box.col = "transparent")
+legend("topright", legend = "True function", lty = 1, inset = c(0.1, 0.01),
+       box.col = "transparent", cex = 0.6)
 ```
 
 
@@ -1180,17 +1180,18 @@ legend("topright", legend = "True function", lty = 1, inset = 0.01,
 
 # Trees are step functions
 
-```{r bagging-2, echo=FALSE, out.width="60%"}
+```{r bagging-2, echo=FALSE, fig.width=6, fig.asp=0.618, out.width="100%"}
 # Fit a single regression tree
-fit <- rpart(y ~ x, cp = 0)
+ctrl <- list(cp = 0, minbucket = 5, maxdepth = 30)
+fit <- rpart(y ~ x, control = ctrl)
 pred <- predict(fit)
-plot(x, y)
+plot(x, y, col = adjustcolor("black", alpha.f = 0.5))
 lines(x, sin(x))
 cols <- RColorBrewer::brewer.pal(9, "Set1")
 lines(x, pred, col = cols[1L], lwd = 2)
 lgnd <- c("True function", "Single tree")
 legend("topright", legend = lgnd, col = c("black", cols[1L]), 
-       lty = 1, inset = 0.01, box.col = "transparent")
+       lty = 1, inset = c(0.1, 0.01), box.col = "transparent", cex = 0.6)
 ```
 
 
@@ -1198,24 +1199,24 @@ legend("topright", legend = lgnd, col = c("black", cols[1L]),
 
 # Trees are noisy
 
-```{r bagging-3, echo=FALSE, out.width="60%"}
+```{r bagging-3, echo=FALSE, fig.width=6, fig.asp=0.618, out.width="100%"}
 # Fit many regression trees to bootstrap samples
-plot(x, y)
+plot(x, y, col = adjustcolor("black", alpha.f = 0.5))
 nsim <- 1000
 pred_mat <- matrix(nrow = length(x), ncol = nsim)
 set.seed(1145)  # for reproducibility
 id <- replicate(nsim, sort(sample(length(x), replace = TRUE)))
 for (i in 1:nsim) {
-  fit <- rpart(y[id[, i]] ~ x[id[, i]], cp = 0)
+  fit <- rpart(y[id[, i]] ~ x[id[, i]], control = ctrl)
   pred_mat[, i] <- predict(fit)
   lines(x[id[, i]], pred_mat[, i], 
-        col = adjustcolor(cols[2L], alpha.f = 0.05))
+        col = adjustcolor(cols[2L], alpha.f = 0.25))
 }
 lines(x, sin(x))
 lines(x, pred, col = cols[1L], lwd = 2)
 lgnd <- c("True function", "Single tree", "Bootstrapped tree")
 legend("topright", legend = lgnd, col = c("black", cols[1L:2L]), 
-       lty = 1, inset = 0.01, box.col = "transparent")
+       lty = 1, inset = c(0.1, 0.01), box.col = "transparent", cex = 0.6)
 ```
 
 
@@ -1223,18 +1224,18 @@ legend("topright", legend = lgnd, col = c("black", cols[1L:2L]),
 
 # Bagging reduces variance
 
-```{r bagging-4, echo=FALSE, out.width="60%"}
-plot(x, y)
+```{r bagging-4, echo=FALSE, fig.width=6, fig.asp=0.618, out.width="100%"}
+plot(x, y, col = adjustcolor("black", alpha.f = 0.5))
 for (i in 1:nsim) {
   lines(x[id[, i]], pred_mat[, i], 
-        col = adjustcolor(cols[2L], alpha.f = 0.05))
+        col = adjustcolor(cols[2L], alpha.f = 0.25))
 }
 lines(x, sin(x))
 lines(x, pred, col = cols[1L], lwd = 2)
 lines(x, apply(pred_mat, MARGIN = 1, FUN = mean), col = cols[6L], lwd = 2)
 lgnd <- c("True function", "Single tree", "Bootstrapped tree", "Averaged trees")
 legend("topright", legend = lgnd, col = c("black", cols[c(1, 2, 6)]), lty = 1, 
-       inset = 0.01, box.col = "transparent")
+       inset = c(0.1, 0.01), box.col = "transparent", cex = 0.6)
 ```
 
 
