@@ -40,6 +40,36 @@ knitr::include_graphics("figures/effo-logo.png")
 
 ]
 
+
+---
+
+# Who am I?
+
+
+.pull-left[
+
+```{r pizza, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figures/pizza.png")
+```
+
+
+]
+
+.pull-right.font150[
+
+* Started at `r anicon::cia("figures/effo-logo.png", animate = FALSE)` in April of 2018
+
+* BS/MS/PhD in Applied Statistics
+
+* `r anicon::faa("r-project", animate = "pulse")` enthusiast `r anicon::cia("https://emojis.slackmojis.com/emojis/images/1450694616/220/bananadance.gif?1450694616", animate = FALSE)`
+
+* Matlab dethusiast `r anicon::cia("https://emojis.slackmojis.com/emojis/images/1483822352/1572/gross.gif?1483822352", animate = FALSE)`
+
+* Maker of `r icon::fa("r-project")` `r emo::ji("package")`s
+
+]
+
+
 ---
 class: clear, split-two
 
@@ -71,6 +101,7 @@ dark2 <- RColorBrewer::brewer.pal(8, name = "Dark2")
 # Brandon's RBitmoji id
 my_id <- "1551b314-5e8a-4477-aca2-088c05963111-v1"
 ```
+
 
 # Overview
 
@@ -380,6 +411,17 @@ knitr::include_graphics("figures/black-box-03.png")
 
 
 ---
+class: clear, middle, center
+
+```{r chuck-norris, echo=FALSE}
+roundhouse::kick("When people tell you machine learning is just a black box",
+                 type = 2, width = 40, size = 25, fps = 5)
+```
+
+[Source](https://bradleyboehmke.github.io/CinDay-RUG-IML-2018/slides-source.html#1)
+
+
+---
 
 # Over fitting
 
@@ -550,44 +592,6 @@ ggplot(res, aes(x = 1/k, y = 1/rmse, color = sample)) +
         axis.ticks.x = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank())
-```
-
-
----
-
-# Data splitting in R
-
-.code125[
-
-```{r sampling}
-library(rsample)  # for data splitting
-
-# Make sure that you get the same random numbers
-set.seed(123)
-data_split <- initial_split(
-  pdp::boston, prop = 0.7, strata = "cmedv"
-)
-
-boston_train <- training(data_split)  # train
-boston_test  <- testing(data_split)  #test
-
-nrow(boston_train)/nrow(pdp::boston)
-```
-
-]
-
-
----
-
-# Outcome distribution
-
-```{r sampling-distribution, fig.width=6, fig.asp=0.618, out.width="60%"}
-library(ggplot2)  # for awesome graphics
-
-# Do the response distributions seem to differ?
-ggplot(boston_train, aes(x = cmedv)) +
-  geom_density(trim = TRUE) +
-  geom_density(data = boston_test, trim = TRUE, col = "red")
 ```
 
 
@@ -2544,9 +2548,9 @@ knitr::include_graphics("figures/george-box.jpg")
 
 
 ---
-class: middle
+class: clear, middle, center
 
-# Questions?
+.font300[Questions?]
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("figures/questions.png")

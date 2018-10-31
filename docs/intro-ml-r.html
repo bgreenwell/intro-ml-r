@@ -36,13 +36,42 @@ Brandon M. Greenwell&lt;br&gt;Enable the Science/Data Scientist&lt;br&gt;[<span>
 
 .pull-right[
 
-&lt;img src="figures/effo-logo.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/effo-logo.png" width="100%" /&gt;
 
 
 ]
 
+
+---
+
+# Who am I?
+
+
+.pull-left[
+
+&lt;img src="figures/pizza.png" width="90%" /&gt;
+
+
+]
+
+.pull-right.font150[
+
+* Started at <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="figures/effo-logo.png" style="height:1em; width:auto; "/&gt;</span> in April of 2018
+
+* BS/MS/PhD in Applied Statistics
+
+* <span>&lt;i class="fab  fa-r-project faa-pulse animated "&gt;&lt;/i&gt;</span> enthusiast <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="https://emojis.slackmojis.com/emojis/images/1450694616/220/bananadance.gif?1450694616" style="height:1em; width:auto; "/&gt;</span>
+
+* Matlab dethusiast <span style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">&lt;img src="https://emojis.slackmojis.com/emojis/images/1483822352/1572/gross.gif?1483822352" style="height:1em; width:auto; "/&gt;</span>
+
+* Maker of <i class="fab  fa-r-project "></i> 📦s
+
+]
+
+
 ---
 class: clear, split-two
+
 
 
 
@@ -295,6 +324,14 @@ Aside from predictions, we are often interested in understanding the way that `\
 
 
 ---
+class: clear, middle, center
+
+&lt;img src="intro-ml-r_files/figure-html/chuck-norris-1.gif" style="display: block; margin: auto;" /&gt;
+
+[Source](https://bradleyboehmke.github.io/CinDay-RUG-IML-2018/slides-source.html#1)
+
+
+---
 
 # Over fitting
 
@@ -394,49 +431,6 @@ Generalization error `\(\approx\)` `\(\sigma^2\)` `\(+\)` .red.vold[Bias] `\(+\)
 ]
 
 &lt;img src="intro-ml-r_files/figure-html/bias-variance-tradeoff-1.svg" width="80%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-# Data splitting in R
-
-.code125[
-
-
-```r
-library(rsample)  # for data splitting
-
-# Make sure that you get the same random numbers
-set.seed(123)
-data_split &lt;- initial_split(
-  pdp::boston, prop = 0.7, strata = "cmedv"
-)
-
-boston_train &lt;- training(data_split)  # train
-boston_test  &lt;- testing(data_split)  #test
-
-nrow(boston_train)/nrow(pdp::boston)
-## [1] 0.7035573
-```
-
-]
-
-
----
-
-# Outcome distribution
-
-
-```r
-library(ggplot2)  # for awesome graphics
-
-# Do the response distributions seem to differ?
-ggplot(boston_train, aes(x = cmedv)) +
-  geom_density(trim = TRUE) +
-  geom_density(data = boston_test, trim = TRUE, col = "red")
-```
-
-&lt;img src="intro-ml-r_files/figure-html/sampling-distribution-1.svg" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2174,9 +2168,9 @@ class: clear, middle
 
 
 ---
-class: middle
+class: clear, middle, center
 
-# Questions?
+.font300[Questions?]
 
 &lt;img src="figures/questions.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>
