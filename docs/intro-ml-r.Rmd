@@ -2116,7 +2116,7 @@ class: clear, center, middle
     
     - Supports the *weighted tree traversal* method for fast construction of PDPs
     
-    - Currently orphaned on CRAN (for now)
+    - ~~Currently orphaned on CRAN~~
     
 * [gbm3](https://github.com/gbm-developers/gbm3): **g**eneralized **b**oosted **m**odels
 
@@ -2467,11 +2467,11 @@ ggplot(pds, aes(x = xval, y = yhat)) +
 
 .scrollable[
 
-* Check out the [machine learning task view](https://cran.r-project.org/web/views/MachineLearning.html)!
+.center.bold[Check out R's [machine learning task view](https://cran.r-project.org/web/views/MachineLearning.html)!]
 
 .pull-left[
 
-## <span style="color:MediumSeaGreen">Random forests:</span>
+### <span style="color:MediumSeaGreen">Random forests:</span>
 
 * Builds an ensemble of fully grown decision trees (**low bias, high variance**)
 
@@ -2489,7 +2489,7 @@ ggplot(pds, aes(x = xval, y = yhat)) +
 
 .pull-right[
 
-## <span style="color:MediumSeaGreen">Gradient boosting machines:</span>
+### <span style="color:MediumSeaGreen">GBMs:</span>
 
 * Builds an ensemble of small decision trees (**high bias, low variance**)
 
