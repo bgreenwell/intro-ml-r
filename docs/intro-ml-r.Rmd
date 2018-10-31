@@ -134,13 +134,11 @@ class: clear, center, middle
 
 .full-width.content-box-purple.font150.center[This talk is about *supervised learning*: building models from data that predict an **outcome** using a collection of **features**]
 
-.font150[
+.font175[
 
 * Many flexible `r emo::ji("hammer and wrench")` for making predictions from data
 
 * They are not magic! They require `r anicon::nia("**good data**", animate = "pulse")` and proper validation!
-
-* Model fitting (and validation) takes longer with "big data" `r emo::ji("time")`
 
 * No one method is uniformly best!
 
@@ -257,13 +255,28 @@ legend("topleft", pch = c(17, 19), col = dark2[1:2], cex = 0.5, bty = "n",
 
 .font200[
 
-Nature acts on $\boldsymbol{X}$ to produce $\boldsymbol{Y}$:
+Nature functions to associate $\boldsymbol{X}$ with $\boldsymbol{Y}$:
 
 ]
 
 ```{r black-box-nature, echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/black-box-nature.svg")
 ```
+
+--
+
+.font175[
+
+* Can we predict what $\boldsymbol{Y}$ will be for future $\boldsymbol{X}$?
+
+* How does nature associate $\boldsymbol{Y}$ with $\boldsymbol{X}$?
+
+]
+
+???
+
+Source: Statistical Modeling: The Two Cultures
+Link: https://projecteuclid.org/euclid.ss/1009213726
 
 
 ---
@@ -281,6 +294,9 @@ knitr::include_graphics("figures/data-modeling-culture.svg")
 ```
 
 ???
+
+Source: Statistical Modeling: The Two Cultures
+Link: https://projecteuclid.org/euclid.ss/1009213726
 
 Domain experts work for years to learn good features; they bring the statistician a "small" data set
 
@@ -300,6 +316,9 @@ knitr::include_graphics("figures/algorithmic-modeling-culture.svg")
 ```
 
 ???
+
+Source: Statistical Modeling: The Two Cultures
+Link: https://projecteuclid.org/euclid.ss/1009213726
 
 We start with a "large" data set with many features and use machine learning to find the "good" ones
 

@@ -108,13 +108,11 @@ class: clear, center, middle
 
 .full-width.content-box-purple.font150.center[This talk is about *supervised learning*: building models from data that predict an **outcome** using a collection of **features**]
 
-.font150[
+.font175[
 
 * Many flexible 🛠 for making predictions from data
 
 * They are not magic! They require <span class=" faa-pulse animated " style=" display: -moz-inline-stack; display: inline-block; transform: rotate(0deg);">**good data**</span> and proper validation!
-
-* Model fitting (and validation) takes longer with "big data" ⏳
 
 * No one method is uniformly best!
 
@@ -184,11 +182,26 @@ class: clear, inverse, center, middle
 
 .font200[
 
-Nature acts on `\(\boldsymbol{X}\)` to produce `\(\boldsymbol{Y}\)`:
+Nature functions to associate `\(\boldsymbol{X}\)` with `\(\boldsymbol{Y}\)`:
 
 ]
 
 &lt;img src="figures/black-box-nature.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+--
+
+.font175[
+
+* Can we predict what `\(\boldsymbol{Y}\)` will be for future `\(\boldsymbol{X}\)`?
+
+* How does nature associate `\(\boldsymbol{Y}\)` with `\(\boldsymbol{X}\)`?
+
+]
+
+???
+
+Source: Statistical Modeling: The Two Cultures
+Link: https://projecteuclid.org/euclid.ss/1009213726
 
 
 ---
@@ -204,6 +217,9 @@ Assume a stochastic data model:
 &lt;img src="figures/data-modeling-culture.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 ???
+
+Source: Statistical Modeling: The Two Cultures
+Link: https://projecteuclid.org/euclid.ss/1009213726
 
 Domain experts work for years to learn good features; they bring the statistician a "small" data set
 
@@ -221,6 +237,9 @@ Find a function `\(f\left(\boldsymbol{X}\right)\)` to predict `\(\boldsymbol{Y}\
 &lt;img src="figures/algorithmic-modeling-culture.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 ???
+
+Source: Statistical Modeling: The Two Cultures
+Link: https://projecteuclid.org/euclid.ss/1009213726
 
 We start with a "large" data set with many features and use machine learning to find the "good" ones
 
