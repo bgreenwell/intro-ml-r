@@ -55,7 +55,7 @@ knitr::include_graphics("figures/pizza.png")
 
 ]
 
-.pull-right.font150[
+.pull-right.font125[
 
 * Started at `r anicon::cia("figures/effo-logo.png", animate = FALSE)` in April of 2018
 
@@ -66,6 +66,8 @@ knitr::include_graphics("figures/pizza.png")
 * Matlab dethusiast `r anicon::cia("https://emojis.slackmojis.com/emojis/images/1483822352/1572/gross.gif?1483822352", animate = FALSE)`
 
 * Maker of `r icon::fa("r-project")` `r emo::ji("package")`s
+
+* [UC Analytics Summit](https://github.com/koalaverse/AnalyticsSummit18)
 
 ]
 
