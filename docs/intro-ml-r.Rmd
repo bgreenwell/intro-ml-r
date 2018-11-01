@@ -37,7 +37,6 @@ Brandon M. Greenwell<br>Enable the Science/Data Scientist<br>[`r anicon::faa("gi
 knitr::include_graphics("figures/effo-logo.png")
 ```
 
-
 ]
 
 
